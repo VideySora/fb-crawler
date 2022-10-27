@@ -1,0 +1,81 @@
+@import 'shared/variables.css';
+@import 'shared/header.css';
+@import 'shared/buttons.css';
+@import 'shared/form.css';
+
+:root {
+  font-size: 20px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to right, var(--color-background-dark), var(--color-background-light));
+  color: var(--color-text-light);
+  max-width: 80%;
+  margin: auto;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+a {
+  color: var(--color-text-light);
+  text-decoration: none;
+}
+
+.container{
+  border: 2px solid var(--color-text-light);
+  /* padding: 20px; */
+  border-radius: 10px;
+  
+  margin-top:2rem;
+  margin-bottom:2rem;
+  padding: 0px; 
+  padding-top: 1rem
+}
+.link {
+  width:55%;
+  border-top: 1px solid var(--color-text-light);
+}
+.allprojects{
+  border-bottom: 2px solid var(--color-text-light);
+  border-right: 2px solid var(--color-text-light);
+  margin:0px;
+  padding: 1rem;
+  display: inline;
+  border-bottom-right-radius: 1rem; border-left:none
+}
+.page-header {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.error-message {
+  color: hsl(var(--color-danger-hue), 100%, 50%);
+}
+
+.scrollcell{
+  text-align: center;
+  border-left: 1px solid var(--color-text-light);
+  border-top: 1px solid var(--color-text-light);
+  border-collapse: collapse;
+}
+
+.tablegroup{
+  width:50%; 
+  margin:auto;
+  /* margin-bottom: 1rem; 
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto; */
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--color-text-light);
+  opacity: 1; /* Firefox */
+}
+/* .headergroup{
+  border-bottom: 1px solid var(--color-text-light);
+  border-collapse: collapse;
+} */

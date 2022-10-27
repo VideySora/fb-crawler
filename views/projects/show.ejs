@@ -1,0 +1,58 @@
+<% layout('layouts/boilerplate') %>
+
+
+<div class="container">
+<p class="allprojects" style="border-bottom-right-radius: 1rem; border-left:none"><a href="/projects" class="href">All Projects</a></p>
+<p class="allprojects" style="border-bottom-right-radius: 1rem; border-left:none"><a href="/projects/<%=project._id%>" class="href">Project: <%= project.name %></a></p>
+<br><br>
+<table class="tablegroup">
+    <tr>
+        <th>
+            Group/Page
+        </th>
+        <th>
+            Scrolls
+        </th>
+    </tr>
+        <% for(let grouppage of project.grouppages) { %>
+        <tr>
+            <td class = "link"><a href="/projects/<%=project._id%>/grouppages/<%=grouppage._id%>"><%=grouppage.link%></a></td>
+            <td class="scrollcell"><%=grouppage.scrolls%></td>
+            
+            <td style="margin:0px;">    
+                <form action="/projects/<%=project._id%>/grouppages/<%=grouppage._id%>?_method=DELETE" style="width:100%" method="POST">
+                    <button class="btn btn-danger" style="margin:0px">Delete</button>
+                </form>
+            </td>
+        </tr>
+        
+        <% }%>
+    </table>
+
+
+    <form action="/projects/<%=project._id%>?_method=DELETE" method="POST">
+        <button class = "btn btn-danger" style = "margin: 1rem">Delete project</button>
+    </form>
+</div>
+
+
+<div class="container" style = "padding: 20px" >
+    <div style = "margin: auto">
+    <form class="form-item" action="/projects/<%=project._id%>?_method=PATCH" method="POST">
+        <div style="display:flex; justify-content: center;">
+            <div style="padding:2rem">
+                <label for="inputlink">Input links: </label>
+                <br>
+                <textarea  name="inputlink" id="inputlink" cols="30" rows="5" placeholder="Group/page link" style="border-radius:1rem"></textarea>
+            </div>
+            <div style="padding:2rem">
+                <label for="scrolls">Scrolls</label>
+                <br>
+                <input type="number" name="scrolls" id="scrolls" placeholder="scrolls" style="border-radius:1rem">
+            </div>
+        </div>
+        <br><br>
+        <button class = "btn btn-primary" style="width:10rem; margin:auto">Submit</button>
+    </form>
+    </div>
+</div>

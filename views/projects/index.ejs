@@ -1,0 +1,19 @@
+<% layout('layouts/boilerplate') %> 
+<div class="container">
+    <p class="allprojects" style="border-bottom-right-radius: 1rem; border-left:none"><a href="/projects" class="href">All Projects</a></p>
+    <br>
+    <br>
+    <table style="width:60%; margin-left:30%; margin-bottom: 1rem; margin-top: 1rem">
+        <% for(let project of projects) { %>
+        <tr>
+            <td class = "link"><a href="/projects/<%=project._id%>"><%= project.name %></a></td>
+            <td>    
+                <form action="/projects/<%=project._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        
+        <% }%>
+    </table>
+</div>
