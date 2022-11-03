@@ -1,0 +1,45 @@
+<% layout('layouts/boilerplate') %>
+<div class="container"> 
+    <p class="allprojects" style="border-bottom-right-radius: 1rem; border-left:none"><a href="/projects" class="href">All Projects</a></p>
+    <p class="allprojects" style="border-bottom-right-radius: 1rem; border-left:none"><a href="/projects/<%=project._id%>" class="href">Project: <%= project.name %></a></p>
+    <p class="allprojects"><a href="/projects/<%=project._id%>/grouppages/<%=grouppage._id%>" class="href">Group/Page: <%=grouppage._id%></a></p>
+    <br><br>   
+    <table class = "tablegroup">
+        <tr >
+            <th class = "headergroup">
+                No.
+            </th>
+            <th class = "headergroup">
+                Group/Page ID
+            </th>
+            <th class = "headergroup">
+                Post ID
+            </th>
+            <th class = "headergroup">
+                Poster ID
+            </th>
+            <th class = "headergroup">
+                Content
+            </th>
+            <th class = "headergroup">
+                Image
+            </th>
+        </tr>
+
+        <% for(let index = 1; index < 11; index++) { %>
+            <tr>
+                <td class="scrollcell" style="border-left: none">
+                    <%=index %>
+                </td>
+                <td class="scrollcell"></td>
+                <td class="scrollcell"></td>
+                <td class="scrollcell"></td>
+                <td class="scrollcell"></td>
+                <td class="scrollcell"></td>
+            </tr>
+            
+            <% }%>
+            
+        </table>
+    
+</div>
