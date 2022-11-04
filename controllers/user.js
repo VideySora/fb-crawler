@@ -1,5 +1,5 @@
 const User = require('../models/User')
-
+const bcrypt = require('bcrypt');
 const Joi = require('@hapi/joi')
 const idSchema = Joi.object().keys({
     userID: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
@@ -118,27 +118,41 @@ const secret = async (req, res, next) => {
 
 const signIn = async (req, res, next) => {
     console.log('Called to signIn function')
-    const { username, password } = req.body
+    // const { username, password } = req.body
 
-    // Check users
-    const foundUser = await User.findOne({ username, password })
-    if (foundUser) res.redirect('/home')
-    else return res.status(403).json({ error: { message: 'Username not found!' } })
+    // // Check users
+    // const foundUser = await User.findOne({ username, password })
+    // if (foundUser) res.redirect('/home')
+    // else return res.status(403).json({ error: { message: 'Username not found!' } })
+    const user = await User.findOne({username: req.body.username});
+    if (!user) return res.status(422).send('Username or Password is not correct');
+
+    const checkPassword = await bcrypt.compare(req.body.password, user.password);
+
+    if (!checkPassword) return res.status(422).send('Email or Password is not correct');
+
+    return res.redirect("/home");
+    //return res.send(`User ${user.username} has logged in`);
 }
 
 const signUp = async (req, res, next) => {
     console.log('Called to signUp function')
-    const { username, password } = req.body
+    const username = req.body.username;
 
     // Check users
     const foundUser = await User.findOne({ username })
     if (foundUser) return res.status(403).json({ error: { message: 'Username has already been used!' } })
 
-    // Create new user
-    const newUser = new User({ username, password })
-    newUser.save()
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.password, salt);
 
-    return res.status(201).json({ success: true })
+    // Create new user
+    const newUser = new User({ username: req.body.username,
+                                password: hashPassword })
+    await newUser.save()
+
+    //res.status(201).send("Register successful.");
+    return res.redirect("/login");
 }
 
 const updateUser = async (req, res, next) => {
