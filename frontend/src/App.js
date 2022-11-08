@@ -7,13 +7,14 @@ import {
   Link,
   useParams,
 } from "react-router-dom"
+// /home
 const Home = () => (
   <>
     <br/>
     <hr/>
   </>
 )
-
+// /projects/create
 const Create = ({ projects, setProjects, newProject, setNewProject }) => {
   const addProject = (event) => {
     event.preventDefault()
@@ -44,6 +45,7 @@ const Create = ({ projects, setProjects, newProject, setNewProject }) => {
     </>
   )
 }
+// /projects/
 const Projects = ({ projects, setProjects, grouppages, setGrouppages }) => {
   function handleDeleteProject(deleteID) {
     fakeAPI.deleteProject(deleteID)
@@ -78,6 +80,7 @@ const Projects = ({ projects, setProjects, grouppages, setGrouppages }) => {
     </>
   )
 }
+// /projects/:id
 const Project = ({ projects, grouppages, setGrouppages, newGrouppage, setNewGrouppage }) => {
   function handleDeleteGrouppage(deleteID) {
     fakeAPI.deleteGrouppage(deleteID)
@@ -132,6 +135,7 @@ const Project = ({ projects, grouppages, setGrouppages, newGrouppage, setNewGrou
     </>
   )
 }
+// /projects/:pid/grouppages/:gid
 const Grouppage = ({ projects, grouppages }) => {
   let pid = useParams().pid;
   let gid = useParams().gid;
