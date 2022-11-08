@@ -1,51 +1,51 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt');
-const Joi = require('@hapi/joi')
-const idSchema = Joi.object().keys({
-    userID: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
-})
+//const Joi = require('@hapi/joi')
+// const idSchema = Joi.object().keys({
+//     userID: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
+// })
 
-const getUser = async (req, res, next) => {
-    // const { userID } = req.value //router helpers created params in value when checked -> use value.params
-    const { userID } = req.value.params
+// const getUser = async (req, res, next) => {
+//     // const { userID } = req.value //router helpers created params in value when checked -> use value.params
+//     const { userID } = req.value.params
 
-    const user = await User.findById(userID)
+//     const user = await User.findById(userID)
 
-    return res.status(200).json({ user })
-}
+//     return res.status(200).json({ user })
+// }
 
-const getUserDeck = async (req, res, next) => {
-    const { userID } = req.value.params
+// const getUserDeck = async (req, res, next) => {
+//     const { userID } = req.value.params
 
-    // get user
-    const user = await User.findById(userID).populate('decks')
+//     // get user
+//     const user = await User.findById(userID).populate('decks')
 
-    return res.status(200).json({ deck: user.decks })
-}
+//     return res.status(200).json({ deck: user.decks })
+// }
 
-const newUserDeck = async (req, res, next) => {
-    const { userID } = req.value.params
+// const newUserDeck = async (req, res, next) => {
+//     const { userID } = req.value.params
 
-    // Create a new deck
-    const newDeck = new Deck(req.body)
+//     // Create a new deck
+//     const newDeck = new Deck(req.body)
 
-    // Get user
-    const user = await User.findById(userID)
+//     // Get user
+//     const user = await User.findById(userID)
 
-    // Assign user to deck
-    newDeck.owner = user
+//     // Assign user to deck
+//     newDeck.owner = user
 
-    // Save deck
-    await newDeck.save()
+//     // Save deck
+//     await newDeck.save()
 
-    // Add deck to users'
-    user.decks.push(newDeck._id)
+//     // Add deck to users'
+//     user.decks.push(newDeck._id)
 
-    // Save user
-    await user.save()
+//     // Save user
+//     await user.save()
 
-    res.status(201).json({ deck: newDeck })
-}
+//     res.status(201).json({ deck: newDeck })
+// }
 
 // const index = (req, res, next) => {
 //     // Callback way
@@ -63,11 +63,11 @@ const newUserDeck = async (req, res, next) => {
 //     }).catch(err => next(err))
 // }
 
-const index = async (req, res, next) => {
-    // Async/await way
-    const users = await User.find({})
-    return res.status(200).json({ users })
-}
+// const index = async (req, res, next) => {
+//     // Async/await way
+//     const users = await User.find({})
+//     return res.status(200).json({ users })
+// }
 
 // const newUser = (req, res, next) => {
 //     console.log('req.body content ', req.body)
@@ -91,26 +91,26 @@ const index = async (req, res, next) => {
 //     }).catch(err => next(err))
 // }
 
-const newUser = async (req, res, next) => {
-    // create object model
-    const newUser = new User(req.value.body)
+// const newUser = async (req, res, next) => {
+//     // create object model
+//     const newUser = new User(req.value.body)
 
-    await newUser.save()
+//     await newUser.save()
 
-    return res.status(201).json({ newUser })
+//     return res.status(201).json({ newUser })
 
-}
+// }
 
-const replaceUser = async (req, res, next) => {
-    // enforce new user to old user
-    const { userID /*, add more if needed */ } = req.value.params
+// const replaceUser = async (req, res, next) => {
+//     // enforce new user to old user
+//     const { userID /*, add more if needed */ } = req.value.params
 
-    const newUser = req.body
+//     const newUser = req.body
 
-    const result = await User.findByIdAndUpdate(userID, newUser)
+//     const result = await User.findByIdAndUpdate(userID, newUser)
 
-    return res.status(200).json({ success: true })
-}
+//     return res.status(200).json({ success: true })
+// }
 
 const secret = async (req, res, next) => {
     console.log('Called to secret function.')
@@ -130,7 +130,6 @@ const signIn = async (req, res, next) => {
     const checkPassword = await bcrypt.compare(req.body.password, user.password);
 
     if (!checkPassword) return res.status(422).send('Email or Password is not correct');
-
     return res.redirect("/home");
     //return res.send(`User ${user.username} has logged in`);
 }
@@ -155,26 +154,26 @@ const signUp = async (req, res, next) => {
     return res.redirect("/login");
 }
 
-const updateUser = async (req, res, next) => {
-    // number of fields
-    const { userID /*, add more if needed */ } = req.value.params
+// const updateUser = async (req, res, next) => {
+//     // number of fields
+//     const { userID /*, add more if needed */ } = req.value.params
 
-    const newUser = req.body
+//     const newUser = req.body
 
-    const result = await User.findByIdAndUpdate(userID, newUser)
+//     const result = await User.findByIdAndUpdate(userID, newUser)
 
-    return res.status(200).json({ success: true })
-}
+//     return res.status(200).json({ success: true })
+// }
 
 module.exports = {
-    getUser,
-    getUserDeck,
-    index,
-    newUser,
-    newUserDeck,
-    replaceUser,
+    // getUser,
+    // getUserDeck,
+    // index,
+    // newUser,
+    // newUserDeck,
+    // replaceUser,
     secret,
     signIn,
     signUp,
-    updateUser
+    //updateUser
 }

@@ -3,12 +3,18 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const session = require('express-session');
+const bcrypt = require('bcrypt');
 const ejsMate = require('ejs-mate');
 const Project = require('./models/project');
 const Grouppage = require('./models/grouppage');
 const Baipost = require('./models/baipost');
+const bodyParser = ('body-parser')
+const UserControler = require('./controllers/user')
+const { validateBody, validateParam, schemas } = require('./helpers/routerHelpers');
+const User = require('./models/User');
 // Connect to database
-mongoose.connect('mongodb+srv://namkha:namkha@merncluster.rwc5tey.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb://localhost/fb-crawler", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("MONGO CONNECT SUCCESS")
     })
@@ -16,44 +22,58 @@ mongoose.connect('mongodb+srv://namkha:namkha@merncluster.rwc5tey.mongodb.net/?r
         console.log("MONGO CONNECT FAILED")
         console.log(err)
     });
+
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(session({secret: 'sthsecret'}));
 app.engine('ejs', ejsMate);
-//middleware
 app.use(express.json());
+
+//middleware
 app.use((req, res, next) => {
-    console.log(req.path, req.method)
-    next()
-});
+    console.log(req.path, req.method);
+    next();
+})
+const requireLogin = (req, res, next) => {
+    if(!req.session.userID)
+        return res.redirect('/login');
+    next();    
+}
+
 // Home page
 app.get('/', (req, res) => {
     res.redirect('/login');
 })
-app.get('/home', async (req, res) => {
+app.get('/home', requireLogin, async (req, res) => {
     res.render('home.ejs')
 })
 // Get form to create new project
-app.get('/projects/create', (req, res) => {
+app.get('/projects/create', requireLogin, (req, res) => {
     res.render('projects/create.ejs')
 })
 // View all projects
-app.get('/projects', async (req, res) => {
-    const projects = await Project.find({});
+app.get('/projects', requireLogin, async (req, res) => {
+    const projects = await Project.find({user: req.session.userID});
     res.render('projects/index.ejs', { projects })
 })
 // View a specific project
-app.get('/projects/:id', async (req, res) => {
+app.get('/projects/:id', requireLogin, async (req, res) => {
     const project = await Project.findById(req.params.id).populate('grouppages');
     res.render('projects/show.ejs', { project })
 })
 // Create new project
 app.post('/projects', async (req, res) => {
     const newProject = new Project(req.body);
+    const user = await User.findById(req.session.userID);
+
+    user.projects.push(newProject);
+    newProject.user.push(user);
     //newProject.inputlink = req.body.inputlink;
     await newProject.save();
+    await user.save();
     res.redirect(`/projects/${newProject._id}`);
 })
 // Update a project
@@ -89,7 +109,7 @@ app.delete('/projects/:pid/grouppages/:gid', async (req, res) => {
     res.redirect(`/projects/${pid}`);
 })
 // View a specific group/page
-app.get('/projects/:pid/grouppages/:gid', async (req, res) => {
+app.get('/projects/:pid/grouppages/:gid', requireLogin, async (req, res) => {
     const { pid, gid } = req.params;
     const project = await Project.findById(pid);
     const grouppage = await Grouppage.findById(gid);
@@ -100,14 +120,6 @@ app.listen(3000, () => {
 })
 
 // Authentication
-const bodyParser = ('body-parser')
-
-const UserControler = require('./controllers/user')
-
-const { validateBody, validateParam, schemas } = require('./helpers/routerHelpers')
-
-// // Middle wares
-// app.use(bodyParser.json())
 
 app.get('/login', (req, res) => {
     res.render('authentication/login.ejs')
@@ -117,6 +129,37 @@ app.get('/signup', (req, res) => {
     res.render('authentication/signup.ejs')
 })
 
-app.post('/login', (validateBody(schemas.signInSchema), UserControler.signIn))
+app.post('/login', (validateBody(schemas.signInSchema)), async (req, res) => {
+    const user = await User.findOne({username: req.body.username});
+    if (!user) return res.status(422).send('Username or Password is not correct');
 
-app.post('/signup', (validateBody(schemas.signUpSchema), UserControler.signUp))
+    const checkPassword = await bcrypt.compare(req.body.password, user.password);
+
+    if (!checkPassword) return res.status(422).send('Email or Password is not correct');
+    req.session.userID = user._id;
+    return res.redirect("/home");
+})
+
+app.post('/signup', (validateBody(schemas.signUpSchema)), async (req, res) => {
+    const username = req.body.username;
+
+    // Check users
+    const foundUser = await User.findOne({ username })
+    if (foundUser) return res.status(403).json({ error: { message: 'Username has already been used!' } })
+
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.password, salt);
+
+    // Create new user
+    const newUser = new User({ username: req.body.username,
+                                password: hashPassword })
+    await newUser.save()
+
+    //res.status(201).send("Register successful.");
+    return res.redirect("/login");
+})
+
+app.post('/logout', (req, res) => {
+    req.session.userID = null;
+    res.redirect('/login');
+})
