@@ -47,49 +47,11 @@ const newUserDeck = async (req, res, next) => {
     res.status(201).json({ deck: newDeck })
 }
 
-// const index = (req, res, next) => {
-//     // Callback way
-//     User.find({}, (err, users) => {
-//         if (err) next(err)
-
-//         return res.status(200).json({users})
-//     })
-// }
-
-// const index = (req, res, next) => {
-//     // Promises way
-//     User.find({}).then(users => {   //User.find({}) <- find all users
-//         return res.status(200).json({users})
-//     }).catch(err => next(err))
-// }
-
 const index = async (req, res, next) => {
     // Async/await way
     const users = await User.find({})
     return res.status(200).json({ users })
 }
-
-// const newUser = (req, res, next) => {
-//     console.log('req.body content ', req.body)
-//     // create object model
-//     const newUser = new User(req.body)
-//     console.log('newUser ', newUser)
-//     newUser.save((err, user) => {
-//         console.error('Error ', err) //if error, throw error else log user
-//         console.log('User saved ', user)
-//         return res.status(201).json({user})
-//     })
-// }
-
-// const newUser = (req, res, next) => {
-//     console.log('req.body content ', req.body)
-//     // create object model
-//     const newUser = new User(req.body)
-//     console.log('newUser ', newUser)
-//     newUser.save().then(user => {
-//         return res.status(201).json({user})
-//     }).catch(err => next(err))
-// }
 
 const newUser = async (req, res, next) => {
     // create object model
@@ -118,40 +80,42 @@ const secret = async (req, res, next) => {
 
 const signIn = async (req, res, next) => {
     console.log('Called to signIn function')
-    // const { username, password } = req.body
+    const { username, password } = req.value.body
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(password, salt);
 
-    // // Check users
-    // const foundUser = await User.findOne({ username, password })
-    // if (foundUser) res.redirect('/home')
-    // else return res.status(403).json({ error: { message: 'Username not found!' } })
-    const user = await User.findOne({username: req.body.username});
-    if (!user) return res.status(422).send('Username or Password is not correct');
+    // Check users
+    const foundUser = await User.findOne({ username, hashPassword })
+    if (foundUser) res.redirect('/home')
+    else return res.status(403).json({ error: { message: 'Username or Password is not correct!' } })
+    // const user = await User.findOne({username: req.body.username});
+    // if (!user) return res.status(422).send('Username or Password is not correct');
 
-    const checkPassword = await bcrypt.compare(req.body.password, user.password);
+    // const checkPassword = await bcrypt.compare(req.body.password, user.password);
 
-    if (!checkPassword) return res.status(422).send('Email or Password is not correct');
+    // if (!checkPassword) return res.status(422).send('Email or Password is not correct');
 
-    return res.redirect("/home");
+    // return res.redirect("/home");
     //return res.send(`User ${user.username} has logged in`);
 }
 
 const signUp = async (req, res, next) => {
     console.log('Called to signUp function')
-    const username = req.body.username;
+    const { username, email, password } = req.value.body;
 
     // Check users
-    const foundUser = await User.findOne({ username })
+    const foundUser = await User.findOne({ username, email })
     if (foundUser) return res.status(403).json({ error: { message: 'Username has already been used!' } })
 
     const salt = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(req.body.password, salt);
+    const hashPassword = await bcrypt.hash(password, salt);
 
     // Create new user
-    const newUser = new User({ username: req.body.username,
+    const newUser = new User({ username: username, email: email, 
                                 password: hashPassword })
     await newUser.save()
 
-    //res.status(201).send("Register successful.");
+    // res.status(201).send("Register successful.");
     return res.redirect("/login");
 }
 

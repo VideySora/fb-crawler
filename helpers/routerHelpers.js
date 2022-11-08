@@ -34,12 +34,13 @@ const validateParam = (schema, name) => {
 
 const schemas = {
   signInSchema: Joi.object().keys({
-    email: Joi.string().email().required(),
+    username: Joi.string().required(),
     password: Joi.string().min(6).required()
   }),
 
   signUpSchema: Joi.object().keys({
     username: Joi.string().required(),
+    email: Joi.string().email().required(),
     password: Joi.string().min(6).required()
   }),
 
@@ -54,15 +55,19 @@ const schemas = {
   }),
 
   userOptional: Joi.object().keys({
-    firstName: Joi.string().regex(/^[a-zA-Z]/).min(2),
-    lastName: Joi.string().regex(/^[a-zA-Z]/).min(2),
-    email: Joi.string().email()
+    // firstName: Joi.string().regex(/^[a-zA-Z]/).min(2),
+    // lastName: Joi.string().regex(/^[a-zA-Z]/).min(2),
+    // email: Joi.string().email()
+        username: Joi.string().required(),
+    password: Joi.string().min(6).required()
   }),
 
   userSchema: Joi.object().keys({
-    firstName: Joi.string().regex(/^[a-zA-Z]/).min(2).required(),
-    lastName: Joi.string().regex(/^[a-zA-Z]/).min(2).required(),
-    email: Joi.string().email().required()
+    // firstName: Joi.string().regex(/^[a-zA-Z]/).min(2).required(),
+    // lastName: Joi.string().regex(/^[a-zA-Z]/).min(2).required(),
+    // email: Joi.string().email().required()
+    username: Joi.string().required(),
+    password: Joi.string().min(6).required()
   })
 }
 

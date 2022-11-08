@@ -100,14 +100,14 @@ app.listen(3000, () => {
 })
 
 // Authentication
-const bodyParser = ('body-parser')
+const bodyParser = require ('body-parser')
 
 const UserControler = require('./controllers/user')
 
 const { validateBody, validateParam, schemas } = require('./helpers/routerHelpers')
 
 // // Middle wares
-// app.use(bodyParser.json())
+app.use(bodyParser.json())
 
 app.get('/login', (req, res) => {
     res.render('authentication/login.ejs')
@@ -117,6 +117,6 @@ app.get('/signup', (req, res) => {
     res.render('authentication/signup.ejs')
 })
 
-app.post('/login', (validateBody(schemas.signInSchema), UserControler.signIn))
+app.post('/login', validateBody(schemas.signInSchema), UserControler.signIn)
 
-app.post('/signup', (validateBody(schemas.signUpSchema), UserControler.signUp))
+app.post('/signup', validateBody(schemas.signUpSchema), UserControler.signUp)
