@@ -14,6 +14,7 @@ const UserControler = require('./controllers/user')
 const { validateBody, validateParam, schemas } = require('./helpers/routerHelpers');
 const User = require('./models/User');
 // Connect to database
+//mongodb+srv://namkha:namkha@fbcrawlercluster.zjovbye.mongodb.net/?retryWrites=true&w=majority
 mongoose.connect("mongodb://localhost/fb-crawler", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("MONGO CONNECT SUCCESS")
@@ -70,7 +71,7 @@ app.post('/projects', async (req, res) => {
     const user = await User.findById(req.session.userID);
 
     user.projects.push(newProject);
-    newProject.user.push(user);
+    newProject.user = user;
     //newProject.inputlink = req.body.inputlink;
     await newProject.save();
     await user.save();
