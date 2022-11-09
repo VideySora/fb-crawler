@@ -1,10 +1,10 @@
 <div class="container" style="padding:20px">
-    <form class="form-item" action="/signup/" method="POST" >
+    <form class="form-item" action="/signup" method="POST" >
         <div style="margin:auto">
-            <input type="text" name="username" id="username" placeholder="Username" style="border-radius:1rem; border:none; width:20rem">
+            <input type="text" name="username" id="username" placeholder="Username" style="border-radius:1rem; border:none; width:20rem" required>
         </div>
         <div style="margin:auto">
-            <input type="password" name="password" id="password" placeholder="Password" style="border-radius:1rem; border:none; width:20rem">
+            <input type="password" name="password" id="password" placeholder="Password" style="border-radius:1rem; border:none; width:20rem" required>
         </div>
 
         <button class="btn btn-primary" style="width:20rem; margin:auto">Sign up</button>
@@ -12,7 +12,7 @@
 </div>
 
 <div class="container" style="padding:20px">
-    <form class="form-item" action="/login/" method="GET" >
+    <form class="form-item" action="/login" method="GET" >
         <button class="btn btn-primary" style="width:20rem; margin:auto">Log in</button>
     </form>
 </div>
