@@ -1,0 +1,16 @@
+.project-page{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+
+    .project-page-container{
+        flex: 1;
+
+        .content-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+    }
+}

@@ -1,0 +1,176 @@
+.auth-page {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(97, 181, 255);
+    height: 100vh;
+
+    .auth-container {
+        &.login {
+            height: 60%;
+
+        }
+
+        &.signup {
+            height: 70%;
+
+        }
+
+        width: 25%;
+        background-color: #2A2D33;
+        display: flex;
+        flex-direction: column;
+        border-radius: 40px;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+
+        box-shadow: 0px 20px 44px 5px rgba(0, 0, 0, 0.32);
+        -webkit-box-shadow: 0px 20px 44px 5px rgba(0, 0, 0, 0.32);
+        -moz-box-shadow: 0px 20px 44px 5px rgba(0, 0, 0, 0.32);
+
+        .top {
+            &.login {
+                height: 100px;
+            }
+
+            &.signup {
+                height: 90px;
+            }
+
+            // background-color: #5B8DF0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .title {
+                font-size: 30px;
+                color: #61DAFB;
+                font-family: "Lato", sans-serif;
+                font-weight: bold;
+            }
+        }
+
+        .center {
+            flex: 1;
+
+            color: #a1afc2;
+            font-weight: bold;
+            font-size: 16px;
+
+
+            .login-form,
+            .signup-form {
+                display: flex;
+                flex-direction: column;
+
+                .email-container {
+                    flex: 1;
+
+                    .email-label {
+                        position: relative;
+                        left: 30px;
+                        margin-bottom: 10px;
+                    }
+
+                    .email-input {
+                        position: relative;
+                        left: 30px;
+                        margin-bottom: 10px;
+
+                        input {
+                            width: 75%;
+                            padding: 10px 10px;
+                            font-size: 16px;
+                            background-color: #636C74;
+                            border: none;
+                            border-radius: 3px;
+                            transition: background-color 0.3s;
+
+                            &:focus {
+                                outline: none;
+                                background-color: #74808a;
+                            }
+
+                            &::placeholder {
+                                color: #17191c;
+                                font-size: 13px;
+                            }
+                        }
+                    }
+                }
+
+                .password-container {
+                    flex: 1;
+
+                    .password-label {
+                        position: relative;
+                        left: 30px;
+                        margin-bottom: 10px;
+                    }
+
+                    .password-input {
+                        position: relative;
+                        left: 30px;
+                        margin-bottom: 10px;
+
+                        input {
+                            width: 75%;
+                            padding: 10px 10px;
+                            background-color: #636C74;
+                            border: none;
+                            border-radius: 3px;
+                            transition: background-color 0.3s;
+
+                            &:focus {
+                                outline: none;
+                                background-color: #74808a;
+                            }
+
+                            &::placeholder {
+                                color: #17191c;
+                                font-size: 13px;
+                            }
+                        }
+                    }
+
+                }
+
+                .submit-container {
+                    flex: 50px;
+                    margin-top: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 50px;
+
+                    .submit {
+                        width: 80%;
+                        height: 100%;
+                        margin: 0;
+                        background-color: #61DAFB;
+                    }
+                }
+            }
+
+
+        }
+
+        .bottom {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a1afc2;
+
+            .signUp,
+            .logIn {
+                all: unset;
+                margin-left: 5px;
+                color: #61DAFB;
+                cursor: pointer;
+            }
+        }
+    }
+}
