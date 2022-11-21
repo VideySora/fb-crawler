@@ -1,5 +1,6 @@
+import React from 'react';
 import "./create.scss";
-import "../../utilites/button.scss"
+import "../../utilites/button.scss";
 
 const Create = ({ projects, setProjects, newProject, setNewProject, createProject }) => {
   const addProject = (event) => {
