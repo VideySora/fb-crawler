@@ -1,0 +1,17 @@
+.create-form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .left{
+        flex: 1;
+
+        .top{
+            margin-bottom: 10px;
+        }
+    }
+
+    .right{
+        flex: 1;
+    }
+}

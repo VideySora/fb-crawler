@@ -1,0 +1,15 @@
+.single-group-page{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+
+    .single-group-page-container{
+        flex: 1;
+
+        .content-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}
