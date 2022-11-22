@@ -8,6 +8,10 @@
 
     .crumb{
         all: unset;
+        cursor: pointer;
 
+        &:hover{
+            color: #37a4de;
+        }
     }
 }

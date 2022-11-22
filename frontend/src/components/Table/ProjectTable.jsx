@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import "../../utilites/button.scss"
 
@@ -15,10 +15,10 @@ function ProjectsTable({ projects, setProjects, newProject, setNewProject, group
   function handleDeleteProject(e, deleteID) {
     e.preventDefault();
     deleteProject(deleteID)
-        .then(nullreturn => {
-            setProjects(projects.filter(pro => pro._id !== deleteID))
-            setGrouppages(grouppages.filter(gp => gp.project._id !== deleteID))
-        })
+      .then(nullreturn => {
+        setProjects(projects.filter(pro => pro._id !== deleteID))
+        setGrouppages(grouppages.filter(gp => gp.project._id !== deleteID))
+      })
   }
 
   return (
@@ -38,13 +38,13 @@ function ProjectsTable({ projects, setProjects, newProject, setNewProject, group
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row" color='red'>
-                <Link to={`/projects/${pro._id}`}>{pro.name}</Link>
+                {pro.name}
               </TableCell>
               <TableCell align="left" color='green'>abc</TableCell>
               <TableCell align="center" color='yellow'>
-                <button className='button view'>View</button>
-                <button className='button delete' onClick={(e)=>handleDeleteProject(e, pro._id)}>Delete</button>
-                
+                <Link to={`/projects/${pro._id}`}><button className='button view'>View</button></Link>
+                <button className='button delete' onClick={(e) => handleDeleteProject(e, pro._id)}>Delete</button>
+
               </TableCell>
             </TableRow>
           ))}

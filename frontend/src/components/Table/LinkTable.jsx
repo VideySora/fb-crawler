@@ -18,9 +18,9 @@ function LinkTable({ projects, grouppages, setGrouppages, deleteGrouppage }) {
   function handleDeleteGrouppage(event, deleteID) {
     event.preventDefault();
     deleteGrouppage(deleteID)
-        .then(nullreturn => {
-            setGrouppages(grouppages.filter(gp => gp._id !== deleteID))
-        })
+      .then(nullreturn => {
+        setGrouppages(grouppages.filter(gp => gp._id !== deleteID))
+      })
   }
   return (
     <TableContainer component={Paper} className="table">
@@ -38,14 +38,12 @@ function LinkTable({ projects, grouppages, setGrouppages, deleteGrouppage }) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <Link to={`/projects/${projects.find(pro => pro._id == id)._id}/grouppages/${gp._id}`}>{gp.link}</Link>
+                {gp.link}
               </TableCell>
               <TableCell align="right" color='yellow'>
-                <button className='button delete'>
-                  View
-                </button>
-                <button className='button delete' onClick={(event)=>handleDeleteGrouppage(event,gp._id)}>Delete</button>
-                
+                <Link to={`/projects/${projects.find(pro => pro._id == id)._id}/grouppages/${gp._id}`}><button className='button delete'>View</button></Link>
+                <button className='button delete' onClick={(event) => handleDeleteGrouppage(event, gp._id)}>Delete</button>
+
               </TableCell>
             </TableRow>
           ))}
