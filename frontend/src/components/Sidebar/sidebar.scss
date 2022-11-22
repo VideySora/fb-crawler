@@ -11,6 +11,8 @@
     width: 194.125px;
     background-color: white;
     border-right: 1.5px solid #37a4de;
+    display: flex;
+    flex-direction: column;
 
     .top {
         height: 50px;

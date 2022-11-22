@@ -25,7 +25,7 @@ function Sidebar() {
                         <span className='title'>Document</span></li>
                     <li>
                         <KeyboardReturnIcon className='icon'/>
-                        <span className='title'>Return</span></li>
+                        <span className='title'>Log out</span></li>
                 </ul>
             </div>
         </div>

@@ -41,7 +41,7 @@ function LinkTable({ projects, grouppages, setGrouppages, deleteGrouppage }) {
                 {gp.link}
               </TableCell>
               <TableCell align="right" color='yellow'>
-                <Link to={`/projects/${projects.find(pro => pro._id == id)._id}/grouppages/${gp._id}`}><button className='button delete'>View</button></Link>
+                <Link to={`/projects/${projects.find(pro => pro._id == id)._id}/grouppages/${gp._id}`}><button className='button view'>View</button></Link>
                 <button className='button delete' onClick={(event) => handleDeleteGrouppage(event, gp._id)}>Delete</button>
 
               </TableCell>
