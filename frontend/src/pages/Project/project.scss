@@ -1,18 +1,18 @@
-.project-page{
+.project-page {
     display: flex;
     min-height: 100vh;
     flex-direction: row;
-    border-left: 1.5px solid #37a4de;
 
 
-    .project-page-container{
+    .project-page-container {
         flex: 1;
+        border-left: 1.5px solid #37a4de;
 
-        .content-container{
+        .content-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            
+
         }
     }
 }

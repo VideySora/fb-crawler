@@ -4,6 +4,7 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import Navbar from '../../components/Navbar/Navbar'
 import "../../utilites/widget.scss"
 import LikeChart from '../../components/Chart/LikeChart'
+import ReactPieChart from '../../components/Chart/ReactPieChart'
 
 function Single() {
     return (
@@ -18,7 +19,10 @@ function Single() {
                         <LikeChart/>
                     </div>
                     <div className="center">
-                        meo meo
+                        <div className="left widget">
+                            <ReactPieChart/>
+                        </div>
+                        <div className="right widget"></div>
                     </div>
                     <div className="list-container widget">
                         This is table for post detail of the page
