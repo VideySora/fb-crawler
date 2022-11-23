@@ -1,30 +1,53 @@
 import React from 'react'
 import "./login.scss"
 import "../../utilites/widget.scss"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "../../utilites/divider.scss"
 
-function checkValid(data) {
-  console.log({ data })
-}
 
-function Login() {
+
+function Login({setToken, errorMessage, setErrorMessage, username, setUsername, password, setPassword, user, setUser, loginService}) {
+  const navigate = useNavigate()
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    
+    try {
+      const user = await loginService({
+        username, password,
+      })
+      window.localStorage.setItem(
+        'loggedUser', JSON.stringify(user)
+      ) 
+      setToken(user.token)
+      setUser(user)
+      setUsername('')
+      setPassword('')
+      navigate('/')
+    } catch (exception) {
+      setErrorMessage('Wrong credentials')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
   return (
     <div className="auth-page login">
       <div className='auth-container widget'>
         <div className="top login"><span className="title">LOGIN</span></div>
         {/* <span className="divider"><hr /></span> */}
         <div className="center">
-          <form onSubmit={checkValid} className="login-form">
+          <form onSubmit={handleLogin} className="login-form">
             <div className="email-container">
               <div className="email-label">
-                <label for="email">Email</label>
+                <label for="email">Username</label>
               </div>
               <div className="email-input">
                 <input
-                  type="email"
-                  placeholder="Enter your email"
-                  required
+                  type="text"
+                  value={username}
+                  name="Username"
+                  placeholder="Enter your username"
+                  onChange={({ target }) => setUsername(target.value)}
                 />
               </div>
 
@@ -37,15 +60,17 @@ function Login() {
               <div className="password-input">
                 <input
                   type="password"
+                  value={password}
+                  name="Password"
                   placeholder="Enter your password"
-                  required
+                  onChange={({ target }) => setPassword(target.value)}
                 />
               </div>
 
             </div>
 
             <div className="submit-container">
-              <button type="submit" className='submit button'><Link to='/projects'>Login</Link></button>
+              <button type="submit" className='submit button'>Login</button>
             </div>
           </form>
         </div>

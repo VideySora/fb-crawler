@@ -45,7 +45,7 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
       </div>
 
       <div className="center">
-      <div className="top create-label"><label htmlFor="createProject">Scrolls</label></div>
+      {/* <div className="top create-label"><label htmlFor="createProject">Scrolls</label></div> */}
         
       </div>
 
