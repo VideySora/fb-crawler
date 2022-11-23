@@ -52,7 +52,7 @@ function ReactPieChart() {
 
     return (
         <div>
-            <Pie options={options} data={data} />
+            <Pie  data={data}/>
         </div>
     )
 }
