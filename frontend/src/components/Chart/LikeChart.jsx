@@ -25,7 +25,7 @@ ChartJS.register(
 
 
 
-function LikeChart() {
+function LikeChart({ groupPost }) {
     const options = {
         responsive: true,
         plugins: {
@@ -40,19 +40,30 @@ function LikeChart() {
         maintainAspectRatio: false
     };
 
-    const labels = ['Zoom TKL', 'NJ80', 'NJ81', 'Mod007', 'Mod008'];
+    let copyBaiposts = [...groupPost];
+    copyBaiposts.sort((a, b) => parseInt(b.shares) - parseInt(a.shares));
+    let shareArray = [];
+    let idArray = [];
+    let i = 0;
+    for (i = 0; i < 10; i++) {
+        shareArray.push(copyBaiposts[i].shares);
+        idArray.push(copyBaiposts[i].post_id);
+    }
+    console.log(shareArray);
+    console.log(idArray);
+    const labels = idArray;
 
     const data = {
         labels,
         datasets: [
             {
-                label: 'Reaction',
-                data: [43, 50, 20, 30, 25],
+                label: 'Share',
+                data: shareArray,
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
             {
-                label: 'Comment',
-                data: [11, 26, 20, 16, 9],
+                label: 'Share',
+                data: shareArray,
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
             },
         ],

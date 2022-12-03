@@ -7,15 +7,7 @@ const grouppageSchema = new Schema({
         type: String,
         default: ""
     },
-    isgroup: {
-        type: Boolean,
-        default: true
-    },
-    scrolls: {
-        type: Number,
-        default: 2
-    },
-    link: {
+    group_id: {
         type: String,
         // required: true
     },

@@ -38,7 +38,7 @@ function LinkTable({ projects, grouppages, setGrouppages, deleteGrouppage }) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {gp.link}
+                {gp.name}
               </TableCell>
               <TableCell align="right" color='yellow'>
                 <Link to={`/projects/${projects.find(pro => pro._id == id)._id}/grouppages/${gp._id}`}><button className='button view'>View</button></Link>

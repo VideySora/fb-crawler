@@ -13,6 +13,7 @@ import {
 import Single from "./pages/Single/Single";
 // import Links from "./pages/Links/Links";
 import Project from "./pages/Project/Project";
+import Bai from "./pages/Bai/Bai";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Login/Signup";
@@ -59,25 +60,37 @@ const deleteGrouppage = async (gid) => {
   const request = axios.delete(`/api/grouppages/${gid}`);
   return request.then((response) => response.data);
 };
+const getAllBaiposts = async () => {
+  const request = axios.get("/api/baiposts");
+  return request.then((response) => response.data);
+};
+const createBaipost = async ({ gid, newBPObject }) => {
+  const request = axios.post(`/api/grouppages/${gid}`, newBPObject);
+  return request.then((response) => response.data);
+};
 /////////////////////////////////////////////////////////////////////
 function App() {
   const [projects, setProjects] = useState([]);
   const [newProject, setNewProject] = useState("");
   const [grouppages, setGrouppages] = useState([]);
   const [newGrouppage, setNewGrouppage] = useState("");
+  const [baiposts, setBaiposts] = useState([]);
+  const [newBaipost, setNewBaipost] = useState("");
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  const [file, setFile] = useState(null);
   
   useEffect(() => {
       getAllProjects().then((allProjects) => {
-        console.log(allProjects);
         setProjects(allProjects);
       });
-
       getAllGrouppages().then((initialGrouppages) => {
         setGrouppages(initialGrouppages);
+      });
+      getAllBaiposts().then((initialBaipost) => {
+        setBaiposts(initialBaipost);
       });
     }, [])
   useEffect(() => {
@@ -88,22 +101,22 @@ function App() {
       setToken(user.token)
     }
   }, [])
-  useEffect(() => {
-    if (user !== null) {
-      console.log("projects are: ", projects)
-      console.log("user is: ", user)
-      // console.log("project[0] is: ", typeof(projects[0].user.username))
-      let filteredProjects = projects.filter(pro => pro.user.username === user.username)
-      console.log("filteredProjects are : ", filteredProjects)
-      setProjects(filteredProjects)
-    }
-  },[user])
+  // useEffect(() => {
+  //   if (user !== null) {
+  //     console.log("projects are: ", projects)
+  //     console.log("user is: ", user)
+  //     // console.log("project[0] is: ", typeof(projects[0].user.username))
+  //     let filteredProjects = projects.filter(pro => pro.user.username === user.username)
+  //     console.log("filteredProjects are : ", filteredProjects)
+  //     setProjects(filteredProjects)
+  //   }
+  // },[user])
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={user ? <Navigate to="/projects" /> : <Navigate replace to="/login" />} />
+            <Route index element={user ? <Navigate to="/projects" /> : <Navigate to="/login" />} />
             <Route
               path="login"
               element={
@@ -140,6 +153,7 @@ function App() {
               }
             ></Route>
             <Route path="projects/:pid/">
+              {console.log("baiposts at App are: ", baiposts)}
               <Route
                 index
                 element={
@@ -151,13 +165,18 @@ function App() {
                     setNewGrouppage={setNewGrouppage}
                     createGrouppage={createGrouppage}
                     deleteGrouppage={deleteGrouppage}
+                    createBaipost={createBaipost}
+                    baiposts={baiposts}
+                    setBaiposts={setBaiposts}
+                    file={file}
+                    setFile={setFile}
                   />
                 }
               ></Route>
-              <Route
-                path="grouppages/:gid"
-                element={<Single projects={projects} grouppages={grouppages} />}
-              ></Route>
+              <Route path="grouppages/:gid">
+                <Route index element={<Single baiposts={baiposts} />}></Route>
+                <Route path="baiposts/:bid" element={<Bai baiposts={baiposts} grouppages={grouppages} />}></Route>
+              </Route>
             </Route>
           </Route>
         </Routes>

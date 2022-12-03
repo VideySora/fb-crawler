@@ -44,14 +44,21 @@ projectRouter.post("/projects", async (request, response) => {
 
 // DELETE /projects/:pid
 // delete project
-projectRouter.delete("/projects/:pid", (request, response, next) => {
-  Grouppage.deleteMany({ project: request.params.pid }).then(() => {
-    Project.findByIdAndRemove(request.params.pid)
-      .then((result) => {
-        response.status(204).end();
-      })
-      .catch((error) => next(error));
+async function deleteBaipostRef({ deleteGroupArray }) {
+  console.log(deleteGroupArray);
+  deleteGroupArray.forEach(async function (Group) {
+    await Baipost.deleteMany({ grouppage: Group._id });
   });
+}
+projectRouter.delete("/projects/:pid", async (request, response, next) => {
+  let deleteGroupArray = await Grouppage.find({ project: request.params.pid });
+  await deleteBaipostRef({ deleteGroupArray });
+  await Grouppage.deleteMany({ project: request.params.pid });
+  Project.findByIdAndRemove(request.params.pid)
+    .then((result) => {
+      response.status(204).end();
+    })
+    .catch((error) => next(error));
 });
 
 module.exports = projectRouter;

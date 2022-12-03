@@ -6,10 +6,11 @@ import "../../utilites/divider.scss"
 import "../../utilites/button.scss"
 import LinkTable from '../../components/Table/LinkTable'
 import InputLink from '../../components/InputLinks/InputLink'
-function Project({ projects, grouppages, setGrouppages, newGrouppage, setNewGrouppage, createGrouppage, deleteGrouppage }) {
+function Project({ projects, grouppages, setGrouppages, newGrouppage, setNewGrouppage, createGrouppage, deleteGrouppage,createBaipost,baiposts, setBaiposts, file, setFile }) {
   
   return (
     <div className="project-page">
+      {console.log("baiposts at Project are: ", baiposts)}
       <Sidebar/>
       <div className="project-page-container">
         <Navbar/>
@@ -21,7 +22,12 @@ function Project({ projects, grouppages, setGrouppages, newGrouppage, setNewGrou
                     setGrouppages={setGrouppages}
                     newGrouppage={newGrouppage}
                     setNewGrouppage={setNewGrouppage}
-                    createGrouppage={createGrouppage}/>
+                    createGrouppage={createGrouppage}
+                    createBaipost={createBaipost}
+                    baiposts={baiposts}
+                    setBaiposts={setBaiposts}
+                    file={file}
+                    setFile={setFile} />
           </div>
           <div className="list-container widget">
             <LinkTable className="link-table"

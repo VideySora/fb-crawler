@@ -3,19 +3,19 @@ const { Schema } = mongoose;
 
 
 const baipostSchema = new Schema({
-    grouppagepost: {
+    post_id: {
         type: String,
         required: true
     },
-    poster: {
+    user_id: {
         type: String,
         default: ""
     },
-    link: {
+    text: {
         type: String,
-        required: true
+        default: ""
     },
-    content: {
+    time: {
         type: String,
         default: ""
     },
@@ -23,6 +23,15 @@ const baipostSchema = new Schema({
         type: String,
         default: ""
     }],
+    likes: {
+        type: Number
+    },
+    comments: {
+        type: Number
+    },
+    shares: {
+        type: Number
+    },
     grouppage: {
         type: Schema.Types.ObjectId,
         ref: 'Grouppage'
