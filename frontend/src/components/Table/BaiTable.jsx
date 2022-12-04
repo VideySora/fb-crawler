@@ -13,6 +13,7 @@ import "../../utilites/button.scss"
 
 function BaiTable({ baiposts }) {
   let gid = useParams().gid;
+  let pid = useParams().pid;
   // const profound = projects.find(pro => pro._id == id)
   // const gpfound = grouppages.filter(gp => gp.project == id)
   
@@ -22,12 +23,13 @@ function BaiTable({ baiposts }) {
         <TableHead>
           <TableRow>
             <TableCell align='left' className='head-col'>Post ID</TableCell>
-            <TableCell align='left' className='head-col'>User ID</TableCell>
+            <TableCell align='left' className='head-col'>User name</TableCell>
             <TableCell align='left' className='head-col'>Content</TableCell>
             <TableCell align='left' className='head-col'>Time</TableCell>
             <TableCell align='left' className='head-col'>Likes</TableCell>
             <TableCell align='left' className='head-col'>Comments</TableCell>
-            <TableCell align='right' className='head-col'>Shares</TableCell>
+            <TableCell align='left' className='head-col'>Shares</TableCell>
+            <TableCell align='left' className='head-col'>Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -40,7 +42,7 @@ function BaiTable({ baiposts }) {
                 {bp.post_id}
               </TableCell>
               <TableCell component="td" scope="row">
-                {bp.user_id}
+                {bp.username}
               </TableCell>
               <TableCell component="td" scope="row">
                 {bp.text}
@@ -56,6 +58,9 @@ function BaiTable({ baiposts }) {
               </TableCell>
               <TableCell component="td" scope="row">
                 {bp.shares}
+              </TableCell>
+              <TableCell align="right" color='yellow'>
+                <Link to={`/projects/${pid}/grouppages/${gid}/baiposts/${bp._id}`}><button className='button view'>View</button></Link>
               </TableCell>
             </TableRow>
           ))}

@@ -173,7 +173,7 @@ function App() {
               ></Route>
               <Route path="grouppages/:gid">
                 <Route index element={<Single baiposts={baiposts} />}></Route>
-                <Route path="baiposts/:bid" element={<Bai baiposts={baiposts} grouppages={grouppages} />}></Route>
+                <Route path="baiposts/:bid" element={<Bai baiposts={baiposts}/>}></Route>
               </Route>
             </Route>
           </Route>

@@ -46,7 +46,7 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
       // console.log("returnBaipostArray.with[0] is: ", returnBaipostArray[0].with[0]);
       // console.log("returnBaipostArray.with[0].name is: ", returnBaipostArray[0].with[0].name);
       const newGPObject= {
-        name: returnBaipostArray[8].with[0].name,
+        name: returnBaipostArray[1].with[0].name,
         group_id: group_id
       }
       let returnedGrouppage = await createGrouppage({ pid, newGPObject });
@@ -54,11 +54,21 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
       setNewGrouppage('');
       let newBaipostArray = [];
       returnBaipostArray.forEach(async function (baipost) {
+        let linkArray = [];
+        baipost.links.forEach(function (onelink) {
+          linkArray.push(onelink.link);
+        })
         const newBPObject = {
           post_id: baipost.post_id,
+          post_url: baipost.post_url,
           user_id: baipost.user_id,
+          user_url: ("https://www.facebook.com/").concat(baipost.user_id),
+          username: baipost.username,
           text: baipost.text,
           time: baipost.time,
+          images_lowquality: [...baipost.images_lowquality],
+          video: baipost.video,
+          links: [...linkArray],
           likes: baipost.likes,
           comments: baipost.comments,
           shares: baipost.shares,

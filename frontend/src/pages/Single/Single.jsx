@@ -23,7 +23,7 @@ function Single({ baiposts }) {
                     </div>
                     <div className="chart-container widget">
                         This is the chart for Most comment or Most like
-                        <LikeChart groupPost={groupPost} gid={gid} />
+                        <LikeChart groupPost={groupPost}/>
                     </div>
                     <div className="center">
                         <div className="left widget">

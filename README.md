@@ -6,3 +6,10 @@ Tasks for 5 member:
 From 15-9 to 29-9:
   + Phước, Kha: create a web with basic function of a crawl data website
   
+  cài node trước
+
+  vào thư mục backend, gõ "npm install" để cài hết các package
+  vào thư mục frontend, gõ "npm install" để cài hết các package
+
+  vào thư mục backend, gõ "npm run dev" để chạy backend
+  vào thư mục frontend, gõ "npm start" để chạy frontend

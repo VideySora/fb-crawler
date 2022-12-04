@@ -7,7 +7,19 @@ const baipostSchema = new Schema({
         type: String,
         required: true
     },
+    post_url: {
+        type: String,
+        default: ""
+    },
     user_id: {
+        type: String,
+        default: ""
+    },
+    user_url: {
+        type: String,
+        default: ""
+    },
+    username: {
         type: String,
         default: ""
     },
@@ -19,7 +31,15 @@ const baipostSchema = new Schema({
         type: String,
         default: ""
     },
-    image: [{
+    images_lowquality: [{
+        type: String,
+        default: ""
+    }],
+    video: {
+        type: String,
+        default: ""
+    },
+    links: [{
         type: String,
         default: ""
     }],
