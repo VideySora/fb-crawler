@@ -116,7 +116,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={user ? <Navigate to="/projects" /> : <Navigate to="/login" />} />
+            <Route index element={user != null ? <Navigate to="/projects" /> : <Navigate to="/login" />} />
             <Route
               path="login"
               element={
@@ -137,7 +137,7 @@ function App() {
             <Route path="signup" element={<Signup />}></Route>
             <Route
               path="projects"
-              element={ user ?
+              element={
                 <Home
                   projects={projects}
                   setProjects={setProjects}
@@ -147,9 +147,7 @@ function App() {
                   setGrouppages={setGrouppages}
                   deleteProject={deleteProject}
                   createProject={createProject}
-                  deleteGrouppage={deleteGrouppage}
-                />
-                : <Navigate  replace to="/login" />
+                  deleteGrouppage={deleteGrouppage}/>
               }
             ></Route>
             <Route path="projects/:pid/">

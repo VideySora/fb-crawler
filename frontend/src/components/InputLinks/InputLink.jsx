@@ -37,7 +37,7 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
     axios(config)
     .then(async function (response) {
       // console.log(JSON.stringify(response.data));
-      console.log(response.data);
+      console.log("response.data is: ", response.data);
       let returnBaipostArray = response.data;
       // console.log("group is: ", newGrouppage);
       // console.log("file is: ", file);
