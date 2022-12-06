@@ -8,7 +8,7 @@ import "../../utilites/divider.scss"
 
 function Login({setToken, errorMessage, setErrorMessage, username, setUsername, password, setPassword, user, setUser, loginService}) {
   const navigate = useNavigate()
-  const handleSignup = async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault()
     
     try {
@@ -16,7 +16,7 @@ function Login({setToken, errorMessage, setErrorMessage, username, setUsername, 
         username, password,
       })
       window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
+        'loggedUser', JSON.stringify(returnUser)
       ) 
       setToken(returnUser.token)
       setUser(returnUser)
@@ -35,10 +35,10 @@ function Login({setToken, errorMessage, setErrorMessage, username, setUsername, 
         <div className="top login"><span className="title">LOGIN</span></div>
         {/* <span className="divider"><hr /></span> */}
         <div className="center">
-          <form onSubmit={handleSignup} className="login-form">
+          <form onSubmit={handleLogin} className="login-form">
             <div className="email-container">
               <div className="email-label">
-                <label for="email">Username</label>
+                <label>Username</label>
               </div>
               <div className="email-input">
                 <input
@@ -54,7 +54,7 @@ function Login({setToken, errorMessage, setErrorMessage, username, setUsername, 
 
             <div className="password-container">
               <div className="password-label">
-                <label for="password">Password</label>
+                <label>Password</label>
               </div>
               <div className="password-input">
                 <input

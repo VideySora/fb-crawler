@@ -28,6 +28,11 @@ const loginService = async credentials => {
   const response = await axios.post('/api/login', credentials)
   return response.data
 }
+
+const signupService = async credentials => {
+  const response = await axios.post('/api/signup', credentials)
+  return response.data
+}
 const getAllProjects = async (uid) => {
   const config = {
     headers: { Authorization: token },
@@ -75,8 +80,7 @@ function App() {
   const [grouppages, setGrouppages] = useState([]);
   const [newGrouppage, setNewGrouppage] = useState("");
   const [baiposts, setBaiposts] = useState([]);
-  const [newBaipost, setNewBaipost] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
@@ -137,7 +141,14 @@ function App() {
                 />
               }
             ></Route>
-            <Route path="signup" element={<Signup username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
+            <Route path="signup" element={<Signup 
+                                            username={username}
+                                            setUsername={setUsername}
+                                            password={password}
+                                            setPassword={setPassword}
+                                            signupService={signupService}
+                                            errorMessage={errorMessage}
+                                            setErrorMessage={setErrorMessage} />}></Route>
             <Route
               path="projects"
               element={
@@ -150,7 +161,9 @@ function App() {
                   setGrouppages={setGrouppages}
                   deleteProject={deleteProject}
                   createProject={createProject}
-                  deleteGrouppage={deleteGrouppage}/>
+                  setUser={setUser}
+                  setToken={setToken}
+                  setBaiposts={setBaiposts}/>
               }
             ></Route>
             <Route path="projects/:pid/">
@@ -171,12 +184,15 @@ function App() {
                     setBaiposts={setBaiposts}
                     file={file}
                     setFile={setFile}
+                    setUser={setUser}
+                    setToken={setToken}
+                    setProjects={setProjects}
                   />
                 }
               ></Route>
               <Route path="grouppages/:gid">
-                <Route index element={<Single baiposts={baiposts} />}></Route>
-                <Route path="baiposts/:bid" element={<Bai baiposts={baiposts}/>}></Route>
+                <Route index element={<Single baiposts={baiposts} setUser={setUser} setToken={setToken} setProjects={setProjects} setGrouppages={setGrouppages} setBaiposts={setBaiposts} />}></Route>
+                <Route path="baiposts/:bid" element={<Bai baiposts={baiposts} setUser={setUser} setToken={setToken} setProjects={setProjects} setGrouppages={setGrouppages} setBaiposts={setBaiposts} />}></Route>
               </Route>
             </Route>
           </Route>

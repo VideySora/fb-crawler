@@ -5,10 +5,24 @@ import { Link, useNavigate } from "react-router-dom"
 import "../../utilites/divider.scss"
 
 
-function Signup({username, setUsername, password, setPassword}) {
+function Signup({username, setUsername, password, setPassword, signupService, errorMessage, setErrorMessage}) {
   const navigate = useNavigate();
   const handleSignup = async(event) => {
     event.preventDefault();
+    try {
+      const returnUser = await signupService({
+        username, password,
+      })
+      console.log("returnUser is: ", returnUser);
+      setUsername('')
+      setPassword('')
+      setErrorMessage(null)
+      navigate('/login')
+    } catch (exception) {
+      console.log("catch is: ", exception);
+      setErrorMessage('Username exist!!')
+      
+    }
   }
   return (
     <div className="auth-page">
@@ -19,7 +33,7 @@ function Signup({username, setUsername, password, setPassword}) {
           <form onSubmit={handleSignup} className="signup-form">
             <div className="email-container">
               <div className="email-label">
-                <label for="email">Email</label>
+                <label>Email</label>
               </div>
               <div className="email-input">
                 <input
@@ -35,16 +49,23 @@ function Signup({username, setUsername, password, setPassword}) {
 
             <div className="password-container">
               <div className="password-label">
-                <label for="password">Password</label>
+                <label>Password</label>
               </div>
               <div className="password-input">
                 <input
                   type="password"
+                  value={password}
                   placeholder="Enter your password"
+                  onChange={({ target }) => setPassword(target.value)}
                   required
                 />
               </div>
 
+            </div>
+            <div className="email-container">
+              <div className="email-label">
+                {errorMessage}
+              </div>
             </div>
             <div className="submit-container">
               <button type="submit" className='submit button'>Sign Up</button>

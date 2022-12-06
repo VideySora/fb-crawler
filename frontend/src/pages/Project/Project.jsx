@@ -6,12 +6,12 @@ import "../../utilites/divider.scss"
 import "../../utilites/button.scss"
 import LinkTable from '../../components/Table/LinkTable'
 import InputLink from '../../components/InputLinks/InputLink'
-function Project({ projects, grouppages, setGrouppages, newGrouppage, setNewGrouppage, createGrouppage, deleteGrouppage,createBaipost,baiposts, setBaiposts, file, setFile }) {
+function Project({ projects, grouppages, setGrouppages, newGrouppage, setNewGrouppage, createGrouppage, deleteGrouppage,createBaipost,baiposts, setBaiposts, file, setFile, setUser, setToken, setProjects }) {
   
   return (
     <div className="project-page">
       {console.log("baiposts at Project are: ", baiposts)}
-      <Sidebar/>
+      <Sidebar setUser={setUser} setToken={setToken} setProjects={setProjects} setGrouppages={setGrouppages} setBaiposts={setBaiposts} />
       <div className="project-page-container">
         <Navbar/>
         <span className='divider'><hr /></span>

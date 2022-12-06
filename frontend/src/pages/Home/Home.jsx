@@ -6,11 +6,11 @@ import ProjectsTable from '../../components/Table/ProjectTable'
 import Create from '../../components/Create/Create'
 import "../../utilites/widget.scss"
 
-function Home({ projects, setProjects, newProject, setNewProject, grouppages, setGrouppages, deleteProject, createProject }) {
+function Home({ projects, setProjects, newProject, setNewProject, grouppages, setGrouppages, deleteProject, createProject, setUser, setToken, setBaiposts }) {
     
     return (
         <div className='projects-page'>
-            <Sidebar />
+            <Sidebar setUser={setUser} setToken={setToken} setProjects={setProjects} setGrouppages={setGrouppages} setBaiposts={setBaiposts}  />
             <div className="projects-page-container">
                 <Navbar />
                 <span className='divider'><hr /></span>

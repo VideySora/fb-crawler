@@ -4,8 +4,22 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import CookieIcon from '@mui/icons-material/Cookie';
 import ArticleIcon from '@mui/icons-material/Article';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-
-function Sidebar() {
+import { useNavigate } from "react-router-dom";
+function Sidebar({setUser, setToken, setProjects, setGrouppages, setBaiposts}) {
+    const navigate = useNavigate();
+    function handleLogout(e){
+        e.preventDefault();
+        console.log("clicked");
+        setUser(null);
+        setToken(null);
+        setProjects([]);
+        setGrouppages([]);
+        setBaiposts([]);
+        window.localStorage.setItem(
+          'loggedUser', null
+        ) 
+        navigate('/login');
+    }
     return (
         <div className="sidebar">
             <div className="top"><span className="logo">Facebook Post</span></div>
@@ -25,7 +39,7 @@ function Sidebar() {
                         <span className='title'>Document</span></li>
                     <li>
                         <KeyboardReturnIcon className='icon'/>
-                        <span className='title'>Log out</span></li>
+                        <span className='title' onClick={(e) => handleLogout(e)}>Log out</span></li>
                 </ul>
             </div>
         </div>
