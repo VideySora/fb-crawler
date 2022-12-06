@@ -13,13 +13,11 @@ function Signup({username, setUsername, password, setPassword, signupService, er
       const returnUser = await signupService({
         username, password,
       })
-      console.log("returnUser is: ", returnUser);
       setUsername('')
       setPassword('')
       setErrorMessage(null)
       navigate('/login')
     } catch (exception) {
-      console.log("catch is: ", exception);
       setErrorMessage('Username exist!!')
       
     }
@@ -33,7 +31,7 @@ function Signup({username, setUsername, password, setPassword, signupService, er
           <form onSubmit={handleSignup} className="signup-form">
             <div className="email-container">
               <div className="email-label">
-                <label>Email</label>
+                <label>Username</label>
               </div>
               <div className="email-input">
                 <input

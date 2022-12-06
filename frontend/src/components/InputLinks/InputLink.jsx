@@ -1,20 +1,17 @@
 import React, { useEffect } from 'react'
 import {Link, useParams} from "react-router-dom"
 import axios from "axios";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 function addLink(){}
 function newLinks(){}
 function handleLinkChange(){}
 
-function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, createGrouppage,createBaipost,baiposts,setBaiposts, file, setFile}) {
+function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, createGrouppage,createBaipost,baiposts,setBaiposts, file, setFile, loader, setLoader}) {
   let pid = useParams().pid;
-  useEffect(() => {
-    console.log("in effect: ", grouppages.length);
-  },[grouppages])
-  useEffect(() => {
-    console.log("in effect: ", baiposts);
-  },[baiposts])
   const addGrouppage = (event) => {
     event.preventDefault();
+    setLoader(true);
     let inputgroup = newGrouppage.replaceAll("https://www.facebook.com/","");
     let group_id = newGrouppage.replaceAll("https://www.facebook.com/groups/","");
     let newForm = new FormData();
@@ -33,18 +30,9 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
       // url: 'https://swapi.dev/api/people',
       data : newForm
     };
-    console.log("newForm is: ", newForm);
     axios(config)
     .then(async function (response) {
-      // console.log(JSON.stringify(response.data));
-      console.log("response.data is: ", response.data);
       let returnBaipostArray = response.data;
-      // console.log("group is: ", newGrouppage);
-      // console.log("file is: ", file);
-      // console.log("returnBaipostArray is: ", returnBaipostArray);
-      // console.log("returnBaipostArray[0].with is: ", returnBaipostArray[0].with);
-      // console.log("returnBaipostArray.with[0] is: ", returnBaipostArray[0].with[0]);
-      // console.log("returnBaipostArray.with[0].name is: ", returnBaipostArray[0].with[0].name);
       const newGPObject= {
         name: returnBaipostArray[1].with[0].name,
         group_id: group_id
@@ -52,6 +40,7 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
       let returnedGrouppage = await createGrouppage({ pid, newGPObject });
       setGrouppages(grouppages.concat(returnedGrouppage));
       setNewGrouppage('');
+      setLoader(false);
       let newBaipostArray = [];
       returnBaipostArray.forEach(async function (baipost) {
         let linkArray = [];
@@ -77,11 +66,8 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
         let returnedBaipost = await createBaipost({gid , newBPObject });
         newBaipostArray.push(returnedBaipost);
       });
-      console.log("newBaipostArray are: ", newBaipostArray);
-      console.log("baiposts at InputLink after Axios are: ", baiposts);
-      // let newArray = baiposts.concat(newBaipostArray);
-      newBaipostArray.push(...baiposts);
-      console.log("newBaipostArray after push are: ", newBaipostArray);
+      console.log("JS object: ", newBaipostArray);
+      console.log("JSON object: ", JSON.stringify(newBaipostArray));
       setBaiposts(newBaipostArray);
     })
     .catch(function (error) {
@@ -96,7 +82,6 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
   return (
     <>
       <form onSubmit={addGrouppage} className="inputLink-form">
-      {console.log("baiposts at InputLink are: ", baiposts)}
       <div className="left">
         <div className="top create-label"><label htmlFor="createProject">Input Links</label></div>
         <div className="bottom create-submit">
@@ -125,7 +110,14 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
       </div>
 
       <div className="right">
-        <button type="submit" className="button">Create</button>
+          <button type="submit" className="button">Create</button>
+          {loader ? (
+            <Box sx={{ display: "flex" }}>
+                <CircularProgress />
+              </Box>
+            ) : (
+              ""
+            )}
       </div>
     </form>
   </>

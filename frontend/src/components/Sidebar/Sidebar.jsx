@@ -9,15 +9,12 @@ function Sidebar({setUser, setToken, setProjects, setGrouppages, setBaiposts}) {
     const navigate = useNavigate();
     function handleLogout(e){
         e.preventDefault();
-        console.log("clicked");
         setUser(null);
         setToken(null);
         setProjects([]);
         setGrouppages([]);
         setBaiposts([]);
-        window.localStorage.setItem(
-          'loggedUser', null
-        ) 
+        window.localStorage.clear();
         navigate('/login');
     }
     return (

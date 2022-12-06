@@ -24,7 +24,6 @@ function BaiTable({ baiposts }) {
           <TableRow>
             <TableCell align='left' className='head-col'>Post ID</TableCell>
             <TableCell align='left' className='head-col'>User name</TableCell>
-            <TableCell align='left' className='head-col'>Content</TableCell>
             <TableCell align='left' className='head-col'>Time</TableCell>
             <TableCell align='left' className='head-col'>Likes</TableCell>
             <TableCell align='left' className='head-col'>Comments</TableCell>
@@ -43,9 +42,6 @@ function BaiTable({ baiposts }) {
               </TableCell>
               <TableCell component="td" scope="row">
                 {bp.username}
-              </TableCell>
-              <TableCell component="td" scope="row">
-                {bp.text}
               </TableCell>
               <TableCell component="td" scope="row">
                 {bp.time}

@@ -45,14 +45,10 @@ function LikeChart({ groupPost }) {
     let shareArray = [];
     let idArray = [];
     let i = 0;
-    console.log("groupPost are: ", groupPost);
-    console.log("copyBaiposts are: ", copyBaiposts);
     for (i = 0; i < 10; i++) {
         shareArray.push(copyBaiposts[i].shares);
         idArray.push(copyBaiposts[i].post_id);
     }
-    console.log(shareArray);
-    console.log(idArray);
     const labels = idArray;
 
     const data = {

@@ -7,7 +7,7 @@ import "../../utilites/widget.scss"
 import LikeChart from '../../components/Chart/LikeChart'
 import ReactPieChart from '../../components/Chart/ReactPieChart'
 
-function Bai({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaiposts  }) {
+function Bai({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaiposts, projects, grouppages  }) {
     let bid = useParams().bid;
     // let groupName = baiposts[0].grouppage.name;
     let onepost = baiposts.find(re => re._id == bid);
@@ -41,7 +41,7 @@ function Bai({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaipo
     <div className='single-group-page'>
             <Sidebar setUser={setUser} setToken={setToken} setProjects={setProjects} setGrouppages={setGrouppages} setBaiposts={setBaiposts} />
             <div className="single-group-page-container">
-                <Navbar />
+                <Navbar projects={projects} grouppages={grouppages} baiposts={baiposts} />
                 <span className='divider'><hr /></span>
                 <div className="content-container">
                     <div className="widget">

@@ -7,14 +7,14 @@ import "../../utilites/widget.scss"
 import LikeChart from '../../components/Chart/LikeChart'
 import ReactPieChart from '../../components/Chart/ReactPieChart'
 import {Link, useParams} from "react-router-dom"
-function Single({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaiposts }) {
+function Single({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaiposts, projects, grouppages }) {
     let gid = useParams().gid;
     let groupPost = baiposts.filter(bp => (bp.grouppage._id === gid))
     return (
     <div className='single-group-page'>
             <Sidebar setUser={setUser} setToken={setToken} setProjects={setProjects} setGrouppages={setGrouppages} setBaiposts={setBaiposts}  />
             <div className="single-group-page-container">
-                <Navbar />
+                <Navbar projects={projects} grouppages={grouppages} baiposts={baiposts} />
                 <span className='divider'><hr /></span>
                 <div className="content-container">
                     <div className="list-container widget">

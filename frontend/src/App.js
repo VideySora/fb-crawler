@@ -21,7 +21,12 @@ import Signup from "./pages/Login/Signup";
 /////////////////////////////////////////////////////////////////////
 let token = null
 const setToken = newToken => {
-  token = `bearer ${newToken}`
+  if (newToken == null) {
+    token = null;
+  }
+  else {
+    token = `bearer ${newToken}`;
+  }
 }
 
 const loginService = async credentials => {
@@ -85,9 +90,21 @@ function App() {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
   const [file, setFile] = useState(null);
+  const [loader, setLoader] = useState(false);
+  //////////////////////////////////////////////////////////
+  
+  // if (user != null) {
+  //   setUser(null);
+  //   setToken(null);
+  //   window.localStorage.setItem(
+  //     'loggedUser', ""
+  //   ) 
+  // }
+  
+  //////////////////////////////////////////////////////////
   
   useEffect(() => {
-    if (user != null) {
+    if (user !== null) {
       getAllProjects(user.user._id).then((allProjects) => {
         setProjects(allProjects);
       });
@@ -97,11 +114,15 @@ function App() {
       getAllBaiposts().then((initialBaipost) => {
         setBaiposts(initialBaipost);
       });
+      let filteredProjects = projects.filter(pro => pro.user.username === user.username);
+      setProjects(filteredProjects);
       }
     }, [user])
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    console.log(loggedUserJSON);
     if (loggedUserJSON) {
+      console.log("in");
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
       setToken(user.token)
@@ -109,18 +130,13 @@ function App() {
   }, [])
   // useEffect(() => {
   //   if (user !== null) {
-  //     console.log("projects are: ", projects)
-  //     console.log("user is: ", user)
-  //     // console.log("project[0] is: ", typeof(projects[0].user.username))
   //     let filteredProjects = projects.filter(pro => pro.user.username === user.username)
-  //     console.log("filteredProjects are : ", filteredProjects)
   //     setProjects(filteredProjects)
   //   }
   // },[user])
   return (
     <div className="App">
       <BrowserRouter>
-        {console.log("user is: ", user)}
         <Routes>
           <Route path="/">
             <Route index element={user != null ? <Navigate to="/projects" /> : <Navigate to="/login" />} />
@@ -163,11 +179,11 @@ function App() {
                   createProject={createProject}
                   setUser={setUser}
                   setToken={setToken}
+                  baiposts={baiposts}
                   setBaiposts={setBaiposts}/>
               }
             ></Route>
             <Route path="projects/:pid/">
-              {console.log("baiposts at App are: ", baiposts)}
               <Route
                 index
                 element={
@@ -187,12 +203,29 @@ function App() {
                     setUser={setUser}
                     setToken={setToken}
                     setProjects={setProjects}
+                    loader={loader}
+                    setLoader={setLoader}
                   />
                 }
               ></Route>
               <Route path="grouppages/:gid">
-                <Route index element={<Single baiposts={baiposts} setUser={setUser} setToken={setToken} setProjects={setProjects} setGrouppages={setGrouppages} setBaiposts={setBaiposts} />}></Route>
-                <Route path="baiposts/:bid" element={<Bai baiposts={baiposts} setUser={setUser} setToken={setToken} setProjects={setProjects} setGrouppages={setGrouppages} setBaiposts={setBaiposts} />}></Route>
+                <Route index element={<Single
+                                            baiposts={baiposts}
+                                            setUser={setUser}
+                                            setToken={setToken} setProjects={setProjects}
+                                            setGrouppages={setGrouppages}
+                                            setBaiposts={setBaiposts}
+                                            projects={projects}
+                                            grouppages={grouppages} />}></Route>
+                <Route path="baiposts/:bid" element={<Bai
+                                                        baiposts={baiposts}
+                                                        setUser={setUser}
+                                                        setToken={setToken}
+                                                        setProjects={setProjects}
+                                                        setGrouppages={setGrouppages}
+                                                        setBaiposts={setBaiposts}
+                                                        projects={projects}
+                                                        grouppages={grouppages} />}></Route>
               </Route>
             </Route>
           </Route>
