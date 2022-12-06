@@ -30,6 +30,7 @@ const Create = ({ projects, setProjects, newProject, setNewProject, createProjec
               placeholder="Your project Name"
               value={newProject}
               onChange={handleProjectChange}
+              required
             />
           </div>
         </div>

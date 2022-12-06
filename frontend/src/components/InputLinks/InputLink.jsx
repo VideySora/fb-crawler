@@ -21,7 +21,7 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
     newForm.append('group', inputgroup);
     newForm.append('file', file);
     newForm.append('pages', 2);
-    newForm.append('comments', false);
+    newForm.append('comments', true);
     newForm.append('reactors', true);
     var config = {
       method: 'post',
@@ -33,7 +33,7 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
       // url: 'https://swapi.dev/api/people',
       data : newForm
     };
-    
+    console.log("newForm is: ", newForm);
     axios(config)
     .then(async function (response) {
       // console.log(JSON.stringify(response.data));

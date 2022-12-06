@@ -8,26 +8,25 @@ import "../../utilites/divider.scss"
 
 function Login({setToken, errorMessage, setErrorMessage, username, setUsername, password, setPassword, user, setUser, loginService}) {
   const navigate = useNavigate()
-  const handleLogin = async (event) => {
+  const handleSignup = async (event) => {
     event.preventDefault()
     
     try {
-      const user = await loginService({
+      const returnUser = await loginService({
         username, password,
       })
       window.localStorage.setItem(
         'loggedUser', JSON.stringify(user)
       ) 
-      setToken(user.token)
-      setUser(user)
+      setToken(returnUser.token)
+      setUser(returnUser)
       setUsername('')
       setPassword('')
+      setErrorMessage(null)
       navigate('/')
     } catch (exception) {
-      setErrorMessage('Wrong credentials')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
+      setErrorMessage('Wrong username or password!')
+      
     }
   }
   return (
@@ -36,7 +35,7 @@ function Login({setToken, errorMessage, setErrorMessage, username, setUsername, 
         <div className="top login"><span className="title">LOGIN</span></div>
         {/* <span className="divider"><hr /></span> */}
         <div className="center">
-          <form onSubmit={handleLogin} className="login-form">
+          <form onSubmit={handleSignup} className="login-form">
             <div className="email-container">
               <div className="email-label">
                 <label for="email">Username</label>
@@ -68,7 +67,12 @@ function Login({setToken, errorMessage, setErrorMessage, username, setUsername, 
               </div>
 
             </div>
-
+            <div className="email-container">
+              <div className="email-label">
+                {errorMessage}
+              </div>
+            </div>
+           
             <div className="submit-container">
               <button type="submit" className='submit button'>Login</button>
             </div>

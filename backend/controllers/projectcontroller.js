@@ -16,8 +16,8 @@ const getTokenFrom = request => {
 }
 // GET /projects
 // get all projects
-projectRouter.get("/projects", (request, response) => {
-  Project.find({})
+projectRouter.get("/projects/:uid", (request, response) => {
+  Project.find({ user: request.params.uid })
     .populate("user")
     .then((pro) => {
       response.json(pro);

@@ -28,11 +28,11 @@ const loginService = async credentials => {
   const response = await axios.post('/api/login', credentials)
   return response.data
 }
-const getAllProjects = async () => {
+const getAllProjects = async (uid) => {
   const config = {
     headers: { Authorization: token },
   }
-  const request = axios.get("/api/projects", config);
+  const request = axios.get(`/api/projects/${uid}`, config);
   return request.then((response) => response.data);
 };
 
@@ -83,7 +83,8 @@ function App() {
   const [file, setFile] = useState(null);
   
   useEffect(() => {
-      getAllProjects().then((allProjects) => {
+    if (user != null) {
+      getAllProjects(user.user._id).then((allProjects) => {
         setProjects(allProjects);
       });
       getAllGrouppages().then((initialGrouppages) => {
@@ -92,7 +93,8 @@ function App() {
       getAllBaiposts().then((initialBaipost) => {
         setBaiposts(initialBaipost);
       });
-    }, [])
+      }
+    }, [user])
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
     if (loggedUserJSON) {
@@ -114,6 +116,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        {console.log("user is: ", user)}
         <Routes>
           <Route path="/">
             <Route index element={user != null ? <Navigate to="/projects" /> : <Navigate to="/login" />} />
@@ -134,7 +137,7 @@ function App() {
                 />
               }
             ></Route>
-            <Route path="signup" element={<Signup />}></Route>
+            <Route path="signup" element={<Signup username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route
               path="projects"
               element={
