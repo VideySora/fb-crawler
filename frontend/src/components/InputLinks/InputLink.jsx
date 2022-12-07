@@ -41,7 +41,7 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
       setGrouppages(grouppages.concat(returnedGrouppage));
       setNewGrouppage('');
       setLoader(false);
-      let newBaipostArray = [];
+      let newBaipostArray = [...baiposts];
       returnBaipostArray.forEach(async function (baipost) {
         let linkArray = [];
         baipost.links.forEach(function (onelink) {
@@ -66,8 +66,6 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
         let returnedBaipost = await createBaipost({gid , newBPObject });
         newBaipostArray.push(returnedBaipost);
       });
-      console.log("JS object: ", newBaipostArray);
-      console.log("JSON object: ", JSON.stringify(newBaipostArray));
       setBaiposts(newBaipostArray);
     })
     .catch(function (error) {
@@ -79,8 +77,19 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
   const handleGrouppageChange = (event) => {
     setNewGrouppage(event.target.value)
   }
+  function Disabled({ children }) {
+    if (loader) {
+      return (
+        <div style={{ opacity: 0.5, pointerEvents: "none" }} disabled>
+          {children}
+        </div>
+      );
+    }
+    return <React.Fragment>{children}</React.Fragment>;
+  }
   return (
     <>
+      {console.log("baiposts is: ", baiposts)}
       <form onSubmit={addGrouppage} className="inputLink-form">
       <div className="left">
         <div className="top create-label"><label htmlFor="createProject">Input Links</label></div>
@@ -109,8 +118,10 @@ function InputLink({grouppages, setGrouppages, newGrouppage, setNewGrouppage, cr
         
       </div>
 
-      <div className="right">
-          <button type="submit" className="button">Create</button>
+        <div className="right">
+          <Disabled>
+            <button type="submit" className="button">Create</button>
+          </Disabled>
           {loader ? (
             <Box sx={{ display: "flex" }}>
                 <CircularProgress />

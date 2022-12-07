@@ -18,11 +18,12 @@ function Single({ baiposts, setUser, setToken, setProjects, setGrouppages, setBa
                 <span className='divider'><hr /></span>
                 <div className="content-container">
                     <div className="list-container widget">
-                    <BaiTable className="link-table"
-                                          baiposts={baiposts}/>
+                        <BaiTable className="link-table"
+                            baiposts={baiposts} grouppages={grouppages} />
                     </div>
                     <div className="chart-container widget">
                         This is the chart for Most comment or Most like
+                        {console.log("groupPost is: ", groupPost)}
                         <LikeChart groupPost={groupPost}/>
                     </div>
                     <div className="center">
