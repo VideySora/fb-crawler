@@ -5,16 +5,17 @@ import Navbar from '../../components/Navbar/Navbar'
 import ProjectsTable from '../../components/Table/ProjectTable'
 import Create from '../../components/Create/Create'
 import "../../utilites/widget.scss"
+import "../../utilites/page.scss"
 
 function Home({ projects, setProjects, newProject, setNewProject, grouppages, setGrouppages, deleteProject, createProject, setUser, setToken,baiposts, setBaiposts }) {
     
     return (
-        <div className='projects-page'>
+        <div className='projects-page page'>
             <Sidebar setUser={setUser} setToken={setToken} setProjects={setProjects} setGrouppages={setGrouppages} setBaiposts={setBaiposts}  />
-            <div className="projects-page-container">
+            <div className="projects-page-container content-container">
                 <Navbar projects={projects} grouppages={grouppages} baiposts={baiposts} />
                 <span className='divider'><hr /></span>
-                <div className="content-container">
+                <div className="content-container-body">
                     <div className="create-project-container widget">
                         <Create className="input-form"
                                                 projects={projects}

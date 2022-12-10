@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 
 // Connect to database
 const url =
-  "mongodb+srv://namkha:namkha@fbcrawlercluster.unk99df.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://namkha:namkha@fbcrawlercluster.dqspp7g.mongodb.net/?retryWrites=true&w=majority";
 console.log("connecting to", url);
 mongoose
   .connect(url)

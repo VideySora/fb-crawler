@@ -6,13 +6,12 @@
 
     .project-page-container {
         flex: 1;
-        border-left: 1.5px solid #37a4de;
 
-        .content-container {
+        .content-container-body{
             display: flex;
             flex-direction: column;
             align-items: center;
-
-        }
+            width: 100%;
+        }   
     }
 }

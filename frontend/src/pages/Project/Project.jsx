@@ -6,6 +6,9 @@ import "../../utilites/divider.scss";
 import "../../utilites/button.scss";
 import LinkTable from "../../components/Table/LinkTable";
 import InputLink from "../../components/InputLinks/InputLink";
+import "../../utilites/page.scss"
+
+
 function Project({
   projects,
   grouppages,
@@ -26,7 +29,7 @@ function Project({
   setLoader,
 }) {
   return (
-    <div className="project-page">
+    <div className="project-page page">
       <Sidebar
         setUser={setUser}
         setToken={setToken}
@@ -34,7 +37,7 @@ function Project({
         setGrouppages={setGrouppages}
         setBaiposts={setBaiposts}
       />
-      <div className="project-page-container">
+      <div className="project-page-container content-container">
         <Navbar
           projects={projects}
           grouppages={grouppages}
@@ -43,7 +46,7 @@ function Project({
         <span className="divider">
           <hr />
         </span>
-        <div className="content-container">
+        <div className="content-container-body">
           <div className="inputLinks-container widget">
             <InputLink
               grouppages={grouppages}

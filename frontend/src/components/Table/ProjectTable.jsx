@@ -8,6 +8,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Link } from "react-router-dom"
+// import {
+//   DataGrid,
+//   GridRowsProp,
+//   GridColDef,
+//   GridToolbar,
+//   GridToolbarContainer,
+//   GridToolbarExport,
+// } from "@mui/x-data-grid";
 
 import "../../utilites/button.scss"
 
@@ -20,6 +28,12 @@ function ProjectsTable({ projects, setProjects, newProject, setNewProject, group
         setGrouppages(grouppages.filter(gp => gp.project._id !== deleteID))
       })
   }
+  
+  // const rows = [];
+
+  // const columns = [
+  //   {field: ""}
+  // ]
 
   return (
     <TableContainer component={Paper} className="table">
@@ -44,7 +58,6 @@ function ProjectsTable({ projects, setProjects, newProject, setNewProject, group
               <TableCell align="center" color='yellow'>
                 <Link to={`/projects/${pro._id}`}><button className='button view'>View</button></Link>
                 <button className='button delete' onClick={(e) => handleDeleteProject(e, pro._id)}>Delete</button>
-
               </TableCell>
             </TableRow>
           ))}

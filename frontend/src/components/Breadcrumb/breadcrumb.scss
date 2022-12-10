@@ -3,15 +3,18 @@
     position: relative;
     left: 50px;
     font-weight:bold;
-    font-size: 20px;
+    font-size: 22px;
     // background-color: antiquewhite;
 
     .crumb{
         all: unset;
+        font-size: 22px;
+        font-weight: 500;
         color:#37a4de;
         cursor: pointer;
+        transition: color 0.3s;
         &:hover{
-            color: green;
+            color: black;
         }
     }
 }

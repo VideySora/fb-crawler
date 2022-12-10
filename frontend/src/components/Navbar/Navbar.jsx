@@ -10,7 +10,7 @@ function Navbar({projects, grouppages, baiposts}) {
           <Breadcrumb projects={projects} grouppages={grouppages} baiposts={baiposts}/>
         </div>
         <div className='right'>
-            <AccountCircleIcon className='avatar'/>
+            <AccountCircleIcon className='avatar' sx={{marginRight: "20px", transform:"scale(1)"}}/>
         </div>
     </div>
   )

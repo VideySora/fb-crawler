@@ -1,7 +1,6 @@
 import React from 'react'
 import "./breadcrumb.scss"
-import useBreadcrumbs from "use-react-router-breadcrumbs";
-import { useParams, Link} from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Stack from '@mui/material/Stack';
@@ -12,69 +11,79 @@ const routes = [
     { path: "/projects", breadcrumb: ">> Projects " },
 ]
 
-function Breadcrumb({projects, grouppages, baiposts}) {
+function Breadcrumb({ projects, grouppages, baiposts }) {
     let pid = useParams().pid;
     let gid = useParams().gid;
     let bid = useParams().bid;
-    if(bid!=null){
+    if (bid != null) {
         const baipostID = baiposts.find(bp => bp._id == bid).post_id;
         const grouppageName = grouppages.find(gp => gp._id == gid).name;
         const projectName = projects.find(pro => pro._id == pid).name;
         return (
             <div className='breadcrumb-container'>
                 <Stack spacing={2}>
-                <Breadcrumbs aria-label="breadcrumb"  separator={<NavigateNextIcon fontSize="small" />}>
-                        <Link to="/projects"  className="crumb">
+                    <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />}>
+                        <Link to="/projects" className="crumb">
+                            <div className="crumb-text">
                             Home
+
+                            </div>
                         </Link>
                         <Link to={`/projects/${pid}`} className="crumb">
-                        Project: {projectName}
+                            <div className="crumb-text">
+                            Project: {projectName}
+                            </div>
                         </Link>
                         <Link to={`/projects/${pid}/grouppages/${gid}`} className="crumb">
-                        Group: {grouppageName}
+                            <div className="crumb-text">
+                            Group: {grouppageName}
+                            </div>
                         </Link>
                         <Link to={`/projects/${pid}/grouppages/${gid}/baiposts/${bid}`} className="crumb">
-                        Post ID: {baipostID}
+                            <div className="crumb-text">
+                            Post ID: {baipostID}
+
+                            </div>
                         </Link>
-                </Breadcrumbs>
+                    </Breadcrumbs>
                 </Stack>
             </div>
         )
     }
-    else if(gid!=null){
+    else if (gid != null) {
         const grouppageName = grouppages.find(gp => gp._id == gid).name;
         const projectName = projects.find(pro => pro._id == pid).name;
         return (
             <div className='breadcrumb-container'>
                 <Stack spacing={2}>
-                <Breadcrumbs aria-label="breadcrumb"  separator={<NavigateNextIcon fontSize="small" />}>
-                        <Link to="/projects"  className="crumb">
+                    <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />}>
+                        <Link to="/projects" className="crumb">
                             Home
                         </Link>
                         <Link to={`/projects/${pid}`} className="crumb">
-                        Project: {projectName}
+                            Project: {projectName}
                         </Link>
                         <Link to={`/projects/${pid}/grouppages/${gid}`} className="crumb">
-                        Group: {grouppageName}
+                            Group: {grouppageName}
                         </Link>
-                </Breadcrumbs>
+                    </Breadcrumbs>
                 </Stack>
             </div>
         )
     }
-    else if(pid!=null){
+    else if (pid != null) {
         const projectName = projects.find(pro => pro._id == pid).name;
         return (
             <div className='breadcrumb-container'>
                 <Stack spacing={2}>
-                <Breadcrumbs aria-label="breadcrumb"  separator={<NavigateNextIcon fontSize="small" />}>
-                        <Link to="/projects"  className="crumb">
+                    <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />}>
+                        <Link to="/projects" className="crumb">
                             Home
                         </Link>
                         <Link to={`/projects/${pid}`} className="crumb">
-                        Project: {projectName}
+                            Project: {projectName}
                         </Link>
-                </Breadcrumbs>
+                    </Breadcrumbs>
                 </Stack>
             </div>
         )
@@ -83,11 +92,11 @@ function Breadcrumb({projects, grouppages, baiposts}) {
         return (
             <div className='breadcrumb-container'>
                 <Stack spacing={2}>
-                <Breadcrumbs aria-label="breadcrumb"  separator={<NavigateNextIcon fontSize="small" />}>
-                        <Link to="/projects"  className="crumb">
+                    <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />}>
+                        <Link to="/projects" className="crumb">
                             Home
                         </Link>
-                </Breadcrumbs>
+                    </Breadcrumbs>
                 </Stack>
             </div>
         )
@@ -95,20 +104,20 @@ function Breadcrumb({projects, grouppages, baiposts}) {
     return (
         <div className='breadcrumb-container'>
             <Stack spacing={2}>
-            <Breadcrumbs aria-label="breadcrumb"  separator={<NavigateNextIcon fontSize="small" />}>
-                <Link underline="hover" color="inherit" href="/" className="crumb">
-                    MUI
-                </Link>
-                <Link
-                    underline="hover"
-                    color="inherit"
-                    href="/material-ui/getting-started/installation/"
-                    className="crumb"
-                >
-                    Core
-                </Link>
-                <Typography color="text.primary" className="crumb">Breadcrumbs</Typography>
-            </Breadcrumbs>
+                <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />}>
+                    <Link underline="hover" color="inherit" href="/" className="crumb">
+                        MUI
+                    </Link>
+                    <Link
+                        underline="hover"
+                        color="inherit"
+                        href="/material-ui/getting-started/installation/"
+                        className="crumb"
+                    >
+                        Core
+                    </Link>
+                    <Typography color="text.primary" className="crumb">Breadcrumbs</Typography>
+                </Breadcrumbs>
             </Stack>
         </div>
     )
