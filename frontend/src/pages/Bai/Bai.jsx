@@ -33,6 +33,10 @@ function Bai({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaipo
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
+    const goToPreviousPicture = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+
     function image() {
         if (onepost.images_lowquality.length != 0) {
             return (
@@ -72,6 +76,21 @@ function Bai({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaipo
                                 ) : (
                                     <KeyboardArrowLeft />
                                 )}
+                            </Button>
+                        }
+                        backButton={
+                            <Button
+                                size="small"
+                                onClick={goToPreviousPicture}
+                                disabled={index === 0}
+                            >
+                                
+                                {theme.direction !== "rtl" ? (
+                                    <KeyboardArrowLeft />
+                                ) : (
+                                    <KeyboardArrowRight />
+                                )}
+                                Previous
                             </Button>
                         }
                     ></MobileStepper>
