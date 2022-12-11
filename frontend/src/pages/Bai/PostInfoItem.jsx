@@ -13,12 +13,22 @@ const contentStyle = {
     color: "#000000"
 }
 
+const linkStyle = {
+    ...contentStyle,
+    color: "#37A4DE",
+    transition: "color 0.15s",
+    "&:hover":{
+        color: "#000000"
+    }
+};
+
+
 function PostInfoItem({ title, content, button = undefined, link = undefined }) {
     return (
         <ListItem>
             {!title ? <Typography sx={titleStyle}><b>&ensp; &ensp; &ensp;</b></Typography>:<Typography sx={titleStyle}><b>{title} : &ensp;</b></Typography>}
             {!link ? (<Typography sx={contentStyle}>{" " + content}</Typography>) :
-                <a href={link} target={"_blank"} style={{all:"unset", cursor:"pointer"}}><Typography sx={contentStyle}>{" " + content}</Typography></a>}
+                <a href={link} target={"_blank"} style={{all:"unset", cursor:"pointer"}}><Typography sx={linkStyle}>{" " + content}</Typography></a>}
             {button ? button : ''}
         </ListItem>
     )
