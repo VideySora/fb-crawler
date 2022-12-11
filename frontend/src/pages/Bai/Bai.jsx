@@ -5,27 +5,71 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import Navbar from '../../components/Navbar/Navbar'
 import PostInfoItem from './PostInfoItem';
 import "../../utilites/widget.scss"
-// import LikeChart from '../../components/Chart/LikeChart'
-// import ReactPieChart from '../../components/Chart/ReactPieChart'
 import "../../utilites/page.scss"
-import { List, Paper, Button } from '@mui/material';
-import {listItemStyle , paperStyle} from "./baipostStyle";
-import ViewPostButton from '../../components/Button/ViewPostButton';
+import { List, Paper, Button, MobileStepper } from '@mui/material';
+import {KeyboardArrowLeft, KeyboardArrowRight} from '@mui/icons-material';
+import { useTheme } from '@emotion/react';
+import { useState } from 'react';
+import {Divider} from "@mui/material";
 
+const imageWrapperStyle = {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "20px"
+}
 
-function Bai({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaiposts, projects, grouppages  }) {
+function Bai({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaiposts, projects, grouppages }) {
     let bid = useParams().bid;
     // let groupName = baiposts[0].grouppage.name;
+    let [index, setActiveStep] = useState(0);
     let onepost = baiposts.find(re => re._id == bid);
+    const theme = useTheme();
+
+    const goToNextPicture = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+
     function image() {
         if (onepost.images_lowquality.length != 0) {
             return (
                 <>
-                    <strong>Images: </strong>
-                    {onepost.images_lowquality.map(imag => (
-                        <img key = {imag} src={imag}></img>
-                    ))}
-                    <br></br>
+                <div className="images-wrapper" style={imageWrapperStyle}>
+                    <img
+                        src={onepost.images_lowquality[index]}
+                        style={{
+                            height: "50%",
+                            width: "100%",
+                            maxWidth: 400,
+                            display: "block",
+                            overflow: "hidden",
+                            minHeight: "50%"
+                        }}
+                    />
+                </div>
+                    <Divider></Divider>
+                    <MobileStepper
+                        variant="text"
+                        sx={{height:"50px", overflow:"hidden"}}
+                        position="static"
+                        index={index}
+                        steps={onepost.images_lowquality.length}
+                        nextButton={
+                          <Button
+                            size="small"
+                            onClick={goToNextPicture}
+                            disabled={index === onepost.images_lowquality.length - 1}
+                          >
+                            Next
+                            {theme.direction !== "rtl" ? (
+                              <KeyboardArrowRight />
+                            ) : (
+                              <KeyboardArrowLeft />
+                            )}
+                          </Button>
+                        }
+                    ></MobileStepper>
                 </>
             )
         }
@@ -43,8 +87,9 @@ function Bai({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaipo
             )
         }
     }
+
     return (
-    <div className='single-group-page page'>
+        <div className='single-group-page page'>
             <Sidebar setUser={setUser} setToken={setToken} setProjects={setProjects} setGrouppages={setGrouppages} setBaiposts={setBaiposts} />
             <div className="single-post-container content-container">
                 <Navbar projects={projects} grouppages={grouppages} baiposts={baiposts} />
@@ -68,9 +113,9 @@ function Bai({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaipo
                             <PostInfoItem title="Name of Group" content={onepost.grouppage.name}></PostInfoItem>
                             <PostInfoItem title="Name of User" content={onepost.username}></PostInfoItem>
                             <PostInfoItem title="Time posting" content={onepost.time}></PostInfoItem>
-                            <PostInfoItem 
-                                title="See Post on Facebook" 
-                                content={onepost.post_url} 
+                            <PostInfoItem
+                                title="See Post on Facebook"
+                                content={onepost.post_url}
                                 link={onepost.post_url}
                             ></PostInfoItem>
                             <PostInfoItem title="Content" content=""></PostInfoItem>
@@ -79,12 +124,19 @@ function Bai({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaipo
                             <PostInfoItem title="Comment" content={onepost.comments}></PostInfoItem>
                             <PostInfoItem title="Share" content={onepost.shares}></PostInfoItem>
                         </List>
-                    </Paper>                    
+                    </Paper>
+
+                    <Paper sx={{ mx: 5, mt: 3, mb:5, boxShadow: 3, borderRadius: "15px", width: "auto" }} elvevation="1" >
+                        <List>
+                            <PostInfoItem title="Images" content=""></PostInfoItem>
+                        </List>
+                        {image()}
+                    </Paper>
                 </div>
 
             </div>
         </div>
-  )
+    )
 }
 
 export default Bai
