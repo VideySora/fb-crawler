@@ -5,9 +5,9 @@ import { Link, useNavigate } from "react-router-dom"
 import "../../utilites/divider.scss"
 
 
-function Signup({username, setUsername, password, setPassword, signupService, errorMessage, setErrorMessage}) {
+function Signup({ username, setUsername, password, setPassword, signupService, errorMessage, setErrorMessage }) {
   const navigate = useNavigate();
-  const handleSignup = async(event) => {
+  const handleSignup = async (event) => {
     event.preventDefault();
     try {
       const returnUser = await signupService({
@@ -19,7 +19,7 @@ function Signup({username, setUsername, password, setPassword, signupService, er
       navigate('/login')
     } catch (exception) {
       setErrorMessage('Username exist!!')
-      
+
     }
   }
   return (
@@ -30,39 +30,48 @@ function Signup({username, setUsername, password, setPassword, signupService, er
         <div className="center">
           <form onSubmit={handleSignup} className="signup-form">
             <div className="email-container">
-              <div className="email-label">
-                <label>Username</label>
+              <div className="label-wrapper">
+                <div className="email-label">
+                  <label>Username</label>
+                </div>
               </div>
-              <div className="email-input">
-                <input
-                  type="text"
-                  value={username}
-                  placeholder="Enter your username"
-                  onChange={({ target }) => setUsername(target.value)}
-                  required
-                />
+              <div className="input-wrapper">
+                <div className="email-input">
+                  <input
+                    type="text"
+                    value={username}
+                    placeholder="Enter your username"
+                    onChange={({ target }) => setUsername(target.value)}
+                    required
+                  />
+                </div>
               </div>
-
             </div>
 
             <div className="password-container">
-              <div className="password-label">
-                <label>Password</label>
+              <div className="label-wrapper">
+                <div className="password-label">
+                  <label>Password</label>
+                </div>
               </div>
-              <div className="password-input">
-                <input
-                  type="password"
-                  value={password}
-                  placeholder="Enter your password"
-                  onChange={({ target }) => setPassword(target.value)}
-                  required
-                />
+              <div className="input-wrapper">
+                <div className="password-input">
+                  <input
+                    type="password"
+                    value={password}
+                    placeholder="Enter your password"
+                    onChange={({ target }) => setPassword(target.value)}
+                    required
+                  />
+                </div>
               </div>
 
             </div>
-            <div className="email-container">
-              <div className="email-label">
-                {errorMessage}
+            <div className="error-container">
+              <div className="label-wrapper">
+                <div className="email-label">
+                  {errorMessage}
+                </div>
               </div>
             </div>
             <div className="submit-container">
@@ -72,7 +81,7 @@ function Signup({username, setUsername, password, setPassword, signupService, er
         </div>
 
         <div className="bottom">
-            <Link to="/login" className='logIn'>Return to Login</Link>
+          <Link to="/login" className='logIn'>Return to Login</Link>
         </div>
       </div>
     </div>

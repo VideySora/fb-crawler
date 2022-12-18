@@ -31,7 +31,7 @@ function Login({ setToken, errorMessage, setErrorMessage, username, setUsername,
   }
   return (
     <div className="auth-page login">
-      <div className='auth-container widget'>
+      <div className='auth-container widget login'>
         <div className="top login"><span className="title">LOGIN</span></div>
         {/* <span className="divider"><hr /></span> */}
         <div className="center">
@@ -73,7 +73,7 @@ function Login({ setToken, errorMessage, setErrorMessage, username, setUsername,
                 </div>
               </div>
             </div>
-            
+
             <div className="error-container">
               <div className="label-wrapper">
                 <div className="email-label">
