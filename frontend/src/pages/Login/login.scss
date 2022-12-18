@@ -67,35 +67,44 @@
 
                 .email-container {
                     flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
 
-                    .email-label {
-                        position: relative;
-                        left: 30px;
+                    .label-wrapper {
+                        flex: 1;
+                        width: calc(100% - 60px);
                         margin-bottom: 10px;
+
+                        .email-label {}
                     }
 
-                    .email-input {
-                        position: relative;
-                        left: 30px;
+                    .input-wrapper {
+                        flex: 1;
+                        width: calc(100% - 60px);
                         margin-bottom: 10px;
 
-                        input {
-                            width: 75%;
-                            padding: 10px 10px;
-                            font-size: 16px;
-                            background-color: #636C74;
-                            border: none;
-                            border-radius: 3px;
-                            transition: background-color 0.3s;
+                        .email-input {
+                            width: 100%;
 
-                            &:focus {
-                                outline: none;
-                                background-color: #74808a;
-                            }
+                            input {
+                                width: calc(100% - 20px);
+                                padding: 10px 10px;
+                                background-color: #636C74;
+                                border: none;
+                                border-radius: 3px;
+                                transition: background-color 0.3s;
 
-                            &::placeholder {
-                                color: #17191c;
-                                font-size: 13px;
+                                &:focus {
+                                    outline: none;
+                                    background-color: #74808a;
+                                }
+
+                                &::placeholder {
+                                    color: #17191c;
+                                    font-size: 13px;
+                                }
                             }
                         }
                     }
@@ -103,42 +112,67 @@
 
                 .password-container {
                     flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
 
-                    .password-label {
-                        position: relative;
-                        left: 30px;
+                    .label-wrapper {
+                        flex: 1;
+                        width: calc(100% - 60px);
                         margin-bottom: 10px;
+
+                        .password-label {}
                     }
 
-                    .password-input {
-                        position: relative;
-                        left: 30px;
+                    .input-wrapper {
+                        flex: 1;
+                        width: calc(100% - 60px);
                         margin-bottom: 10px;
 
-                        input {
-                            width: 75%;
-                            padding: 10px 10px;
-                            background-color: #636C74;
-                            border: none;
-                            border-radius: 3px;
-                            transition: background-color 0.3s;
+                        .password-input {
+                            width: 100%;
 
-                            &:focus {
-                                outline: none;
-                                background-color: #74808a;
-                            }
+                            input {
+                                width: calc(100% - 20px);
+                                padding: 10px 10px;
+                                background-color: #636C74;
+                                border: none;
+                                border-radius: 3px;
+                                transition: background-color 0.3s;
 
-                            &::placeholder {
-                                color: #17191c;
-                                font-size: 13px;
+                                &:focus {
+                                    outline: none;
+                                    background-color: #74808a;
+                                }
+
+                                &::placeholder {
+                                    color: #17191c;
+                                    font-size: 13px;
+                                }
                             }
                         }
                     }
+                }
 
+                .error-container {
+                    flex: 0.4;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 10px;
+
+                    .label-wrapper {
+                        flex: 1;
+                        width: calc(100% - 60px);
+
+                        .email-label {}
+                    }
                 }
 
                 .submit-container {
-                    flex: 50px;
+                    height: 50px;
                     margin-top: 10px;
                     display: flex;
                     align-items: center;
@@ -174,3 +208,22 @@
         }
     }
 }
+
+// input {
+//     width: 75%;
+//     padding: 10px 10px;
+//     background-color: #636C74;
+//     border: none;
+//     border-radius: 3px;
+//     transition: background-color 0.3s;
+
+//     &:focus {
+//         outline: none;
+//         background-color: #74808a;
+//     }
+
+//     &::placeholder {
+//         color: #17191c;
+//         font-size: 13px;
+//     }
+// }
