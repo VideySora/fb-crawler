@@ -27,7 +27,6 @@ function Sidebar({setUser, setToken, setProjects, setGrouppages, setBaiposts}) {
                 <Avatar alt="Logo BK" src={LogoBK} className="logo"></Avatar>
                 <span className="top-title">Facebook Post</span>
             </div>
-
             <span className="divider"><hr /></span>
 
             <div className="center">
@@ -35,9 +34,6 @@ function Sidebar({setUser, setToken, setProjects, setGrouppages, setBaiposts}) {
                     <li>
                         <AccountTreeIcon className='icon'/>
                         <span className='title'>Projects</span></li>
-                    <li>
-                        <ArticleIcon className='icon'/>
-                        <span className='title'>Document</span></li>
                     <li>
                         <KeyboardReturnIcon className='icon'/>
                         <span className='title' onClick={(e) => handleLogout(e)}>Log out</span></li>
