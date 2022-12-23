@@ -74,4 +74,6 @@ Okay, that's it, we have installed installed nodejs.
   username: admin
   password: admin
   ```
++ Or you can sign up and create new account.
+
 + And that's it, you can try our website's feature from this point.
