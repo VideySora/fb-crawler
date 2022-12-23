@@ -34,7 +34,7 @@ function LikeChart({ groupPost }) {
             },
             title: {
                 display: true,
-                text: 'Chart Statistic',
+                text: 'Comment and shares of 10 newest posts',
             },
         },
         maintainAspectRatio: false
@@ -44,9 +44,11 @@ function LikeChart({ groupPost }) {
     copyBaiposts.sort((a, b) => parseInt(b.shares) - parseInt(a.shares));
     let shareArray = [];
     let idArray = [];
+    let commentArray = [];
     let i = 0;
     for (i = 0; i < 10; i++) {
         shareArray.push(copyBaiposts[i].shares);
+        commentArray.push(copyBaiposts[i].comments)
         idArray.push(copyBaiposts[i].post_id);
     }
     const labels = idArray;
@@ -55,8 +57,8 @@ function LikeChart({ groupPost }) {
         labels,
         datasets: [
             {
-                label: 'Share',
-                data: shareArray,
+                label: 'Comment',
+                data: commentArray,
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
             {

@@ -25,7 +25,6 @@ function Single({ baiposts, setUser, setToken, setProjects, setGrouppages, setBa
                             baiposts={baiposts} grouppages={grouppages} />
                     </div>
                     <div className="chart-container widget">
-                        This is the chart for Most comment or Most like
                         {console.log("groupPost is: ", groupPost)}
                         <LikeChart groupPost={groupPost}/>
                     </div>
