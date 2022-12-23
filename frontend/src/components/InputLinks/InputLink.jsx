@@ -117,6 +117,7 @@ function InputLink({
               placeholder="Enter your link here"
               value={newGrouppage}
               onChange={handleGrouppageChange}
+              style={{width:"400px"}}
             />
             <input
               name="inputfile"
