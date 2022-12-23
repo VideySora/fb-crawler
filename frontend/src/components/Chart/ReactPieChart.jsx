@@ -5,26 +5,27 @@ import { Pie } from 'react-chartjs-2'
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function ReactPieChart() {
-    const options = {
+    const option = {
         responsive: true,
         plugins: {
-            // legend: {
-            //     position: 'top'
-            // },
+            legend: {
+                position: 'top'
+            },
             title: {
                 display: true,
-                text: 'Reaction Stat',
+                text: 'Reactors proportion of the Most popular posts',
             },
         },
-        maintainAspectRatio: false
-    }
+        maintainAspectRatio: true
+    };
 
     const data = {
+        
         labels: ['Like 👍', 'Haha 😆', 'Love ❤', 'Give heart 🥰', 'Angry 😡', 'Sad 😢'],
         datasets: [
             {
                 label: 'Percentage of Votes',
-                data: [20, 10, 30, 25, 1, 14],
+                data: [2703,1705, 3700, 1345, 126, 140],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',    
                     'rgba(153, 102, 255, 0.2)',
@@ -52,7 +53,7 @@ function ReactPieChart() {
 
     return (
         <div>
-            <Pie  data={data}/>
+            <Pie options={option} data={data}/>
         </div>
     )
 }

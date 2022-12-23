@@ -8,10 +8,13 @@
 
     .crumb{
         all: unset;
+        font-size: 20px;
+        font-weight: 500;
+        color:#37a4de;
         cursor: pointer;
-
+        transition: color 0.3s;
         &:hover{
-            color: #37a4de;
+            color: black;
         }
     }
 }

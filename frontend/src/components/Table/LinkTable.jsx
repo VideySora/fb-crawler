@@ -27,7 +27,7 @@ function LinkTable({ projects, grouppages, setGrouppages, deleteGrouppage }) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align='left' className='head-col'>Link</TableCell>
+            <TableCell align='left' className='head-col'>Group</TableCell>
             <TableCell align="right" className='head-col'>Action</TableCell>
           </TableRow>
         </TableHead>

@@ -3,14 +3,15 @@
     flex-direction: row;
 
 
-    .single-group-page-container{
+    .single-post-container{
         flex: 1;
         border-left: 1.5px solid #37a4de;
 
-        .content-container{
+        .content-container-body{
             display: flex;
             flex-direction: column;
             align-items: left;
+            width: 100%;
 
             .chart-container{
                 height: 80vh;

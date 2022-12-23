@@ -6,14 +6,13 @@ const baipostRouter = require("./controllers/baipostcontroller");
 const projectRouter = require("./controllers/projectcontroller");
 const grouppageRouter = require("./controllers/grouppagecontroller");
 const userRouter = require('./controllers/usercontroller')
-const loginRouter = require('./controllers/login')
 
 const middleware = require("./utils/middleware");
 const mongoose = require("mongoose");
 
 // Connect to database
 const url =
-  "mongodb+srv://namkha:namkha@fbcrawlercluster.unk99df.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://namkha:namkha@fbcrawlercluster.dqspp7g.mongodb.net/?retryWrites=true&w=majority";
 console.log("connecting to", url);
 mongoose
   .connect(url)
@@ -30,7 +29,6 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 
 app.use('/api', baipostRouter);
-app.use('/api', loginRouter)
 app.use("/api", projectRouter);
 app.use("/api", grouppageRouter);
 app.use('/api', userRouter);
