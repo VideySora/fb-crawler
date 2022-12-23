@@ -34,7 +34,7 @@ function LikeChart({ groupPost }) {
             },
             title: {
                 display: true,
-                text: 'Comment and shares of 10 newest posts',
+                text: '10 posts with most likes, comments and shares',
             },
         },
         maintainAspectRatio: false
@@ -45,10 +45,12 @@ function LikeChart({ groupPost }) {
     let shareArray = [];
     let idArray = [];
     let commentArray = [];
+    let likeArray = [];
     let i = 0;
     for (i = 0; i < 10; i++) {
+        likeArray.push(copyBaiposts[i].likes);
         shareArray.push(copyBaiposts[i].shares);
-        commentArray.push(copyBaiposts[i].comments)
+        commentArray.push(copyBaiposts[i].comments);
         idArray.push(copyBaiposts[i].post_id);
     }
     const labels = idArray;
@@ -56,6 +58,12 @@ function LikeChart({ groupPost }) {
     const data = {
         labels,
         datasets: [
+            {
+                label: 'Like',
+                // data: [1614, 1384, 804, 1026, 829, 743, 190, 560, 692, 740],
+                data: likeArray,
+                backgroundColor: 'rgba(56, 255, 56, 0.5)',
+            },
             {
                 label: 'Comment',
                 data: commentArray,

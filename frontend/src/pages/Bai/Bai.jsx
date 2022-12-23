@@ -164,9 +164,9 @@ function Bai({ baiposts, setUser, setToken, setProjects, setGrouppages, setBaipo
                             ></PostInfoItem>
                             {onepost.text == "" ? <PostInfoItem title="Content" content="None"></PostInfoItem>:<PostInfoItem title="Content" content=""></PostInfoItem>}
                             {onepost.text == "" ? "":<PostInfoItem content={onepost.text}></PostInfoItem>}
-                            <PostInfoItem title="Reactions" content={onepost.likes}></PostInfoItem>
-                            <PostInfoItem title="Comment" content={onepost.comments}></PostInfoItem>
-                            <PostInfoItem title="Share" content={onepost.shares}></PostInfoItem>
+                            <PostInfoItem title="Likes" content={onepost.likes}></PostInfoItem>
+                            <PostInfoItem title="Comments" content={onepost.comments}></PostInfoItem>
+                            <PostInfoItem title="Shares" content={onepost.shares}></PostInfoItem>
                         </List>
                     </Paper>
 

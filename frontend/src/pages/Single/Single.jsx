@@ -28,11 +28,6 @@ function Single({ baiposts, setUser, setToken, setProjects, setGrouppages, setBa
                         {console.log("groupPost is: ", groupPost)}
                         <LikeChart groupPost={groupPost}/>
                     </div>
-                    <div className="center">
-                        <div className="left widget">
-                            <ReactPieChart/>
-                        </div>
-                    </div>
                 </div>
 
             </div>
