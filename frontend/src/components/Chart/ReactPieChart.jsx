@@ -13,7 +13,7 @@ function ReactPieChart() {
             },
             title: {
                 display: true,
-                text: 'Reactors proportion of the Most popular group',
+                text: 'Reactors proportion of the Most popular posts',
             },
         },
         maintainAspectRatio: true
