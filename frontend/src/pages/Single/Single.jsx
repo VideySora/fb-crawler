@@ -33,7 +33,6 @@ function Single({ baiposts, setUser, setToken, setProjects, setGrouppages, setBa
                         <div className="left widget">
                             <ReactPieChart/>
                         </div>
-                        <div className="right widget"></div>
                     </div>
                 </div>
 
